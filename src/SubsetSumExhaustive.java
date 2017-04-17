@@ -5,6 +5,7 @@
  * Project: 4
  */
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -24,5 +25,18 @@ public class SubsetSumExhaustive implements SubsetSum {
      */
     public boolean subsetExists(List<Integer> multiset, int sum) {
         return false;
+    }
+
+    /**
+     * Used to test Subset Sum Exhaustive Search method
+     *
+     * @param args
+     */
+    public static void main(String[] args) {
+        SubsetSumExhaustive s = new SubsetSumExhaustive();
+        List<Integer> S = Arrays.asList(1, 2, 3, 9);
+        int k = 4;
+        boolean result = s.subsetExists(S, k);
+        System.out.println(result);
     }
 }
