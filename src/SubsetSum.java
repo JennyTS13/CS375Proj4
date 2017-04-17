@@ -13,7 +13,7 @@ import java.util.List;
 public interface SubsetSum {
 
     /**
-     * Returns boolean indicating if a there exist a subset of the set S where
+     * Returns boolean indicating if there exists a subset of the set S where
      * the sum of its elements is equal to a specified sum k.
      *
      * @param multiset List of intergers in the multiset S
