@@ -1,5 +1,5 @@
 /*
- * File:    SubsetSum.java
+ * File:    SubsetSumExhaustive.java
  * Authors: Charlie Beck, Phoebe Hughes, Tiffany Lam, Jenny Lin
  * Date:    April 21, 2017
  * Project: 4
@@ -8,9 +8,10 @@
 import java.util.List;
 
 /**
- * An interface used for the Subset Sum problem
+ * Finds if there exists a subset of the set S where
+ * the sum of its elements is equal to a specified sum k.
  */
-public interface SubsetSum {
+public class SubsetSumExhaustive implements SubsetSum {
 
     /**
      * Returns boolean indicating if there exists a subset of the set S where
@@ -21,5 +22,7 @@ public interface SubsetSum {
      *
      * @return boolean indicating if such a subset exists
      */
-    boolean subsetExists(List<Integer> multiset, int sum);
+    public boolean subsetExists(List<Integer> multiset, int sum) {
+        return false;
+    }
 }
