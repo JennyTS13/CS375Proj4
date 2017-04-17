@@ -14,8 +14,8 @@ import java.util.List;
 public class SubsetSumExhaustive implements SubsetSum {
 
     /**
-     * Returns boolean indicating if there exists a subset of the set S where
-     * the sum of its elements is equal to a specified sum k.
+     * Checks all possible subsets of S until it finds a subset (if any)
+     * with the appropriate sum (k).
      *
      * @param multiset List of integers in the multiset S
      * @param sum int indicating the specified sum k
