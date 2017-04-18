@@ -10,5 +10,5 @@
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumGreedy {
+public class SubsetSumGreedy extends SubsetSum {
 }
