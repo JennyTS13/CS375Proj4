@@ -34,7 +34,7 @@ public class Driver {
      * @param version the name of the SubsetSum being tested
      * @param s the SubsetSum
      */
-    private static void test(String version, SubsetSum s) {
+    private static void test(String version, SubsetSumExact s) {
         // warm up
         s.subsetExists(S, k);
 

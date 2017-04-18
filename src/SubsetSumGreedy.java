@@ -5,7 +5,7 @@
  * Project: 4
  */
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Finds if there exists a subset of the set S where
@@ -24,7 +24,13 @@ public class SubsetSumGreedy implements SubsetSumApprox {
      * @return double - the residue
      */
     public double subsetResidue(List<Integer> multiset, int sum){
+        Collections.sort(multiset);
         return 0;
+    }
+
+    public static void main(String[] args){
+        List<Integer> intList = new ArrayList<>(Arrays.asList(1, 2, 3));
+        System.out.println(intList.toString());
     }
 
 }
