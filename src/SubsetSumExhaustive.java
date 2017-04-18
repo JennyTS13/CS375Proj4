@@ -48,13 +48,13 @@ public class SubsetSumExhaustive implements SubsetSumExact {
      * @return A list of all subsets
      */
     public List<List<Integer>> getSubsets(List<Integer> multiset) {
-        ArrayList<List<Integer>> subsetsList = new ArrayList<List<Integer>>();
+        ArrayList<List<Integer>> subsetsList = new ArrayList<>();
         // base case
         if (multiset.size() == 0) {
-            subsetsList.add(new ArrayList<Integer>());
+            subsetsList.add(new ArrayList<>());
         }
         else {
-            List<Integer> remainingSet = new ArrayList<Integer>();
+            List<Integer> remainingSet = new ArrayList<>();
             remainingSet.addAll(multiset);
 
             // recursively removes first element and finds subsets

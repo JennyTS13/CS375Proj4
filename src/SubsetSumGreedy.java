@@ -37,11 +37,15 @@ public class SubsetSumGreedy implements SubsetSumApprox {
         //Add next element in the sorted list to the subset if
         //the integer will not give the subset too large a sum
         //Otherwise, ignore that integer and move on to the next integer in the list
-        for(int i = 0; i < multiSetS.size(); i++){
-            Integer currElement = multiSetS.get(i);
-            if(subsetSum + currElement <= sum){
-                intSubset.add(currElement);
-                subsetSum += currElement;
+        for(int val : multiSetS){
+            if(subsetSum + val <= sum){
+                intSubset.add(val);
+                subsetSum += val;
+
+                //return 0 as residue if current sum is equal to the target sum
+                if(subsetSum == sum){
+                    return 0;
+                }
             }
         }
 
