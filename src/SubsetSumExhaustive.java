@@ -5,6 +5,9 @@
  * Project: 4
  */
 
+import sun.jvm.hotspot.oops.Array;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +27,50 @@ public class SubsetSumExhaustive implements SubsetSumExact {
      * @return boolean indicating if such a subset exists
      */
     public boolean subsetExists(List<Integer> multiset, int sum) {
+        List<List<Integer>> subsets = getSubsets(multiset);
+        for (List<Integer> subset : subsets) {
+            int k = 0;
+            for (int val : subset) {
+                k += val;
+            }
+            if (k == sum) {
+                return true;
+            }
+        }
         return false;
+    }
+
+    /**
+     * Finds all subsets of a given multiset S
+     *
+     * @param multiset List of integers in the multiset S
+     *
+     * @return A list of all subsets
+     */
+    public List<List<Integer>> getSubsets(List<Integer> multiset) {
+        ArrayList<List<Integer>> subsetsList = new ArrayList<List<Integer>>();
+        // base case
+        if (multiset.size() == 0) {
+            subsetsList.add(new ArrayList<Integer>());
+        }
+        else {
+            List<Integer> remainingSet = new ArrayList<Integer>();
+            remainingSet.addAll(multiset);
+
+            // recursively removes first element and finds subsets
+            int firstElement = remainingSet.remove(0);
+            List<List<Integer>> subsets = getSubsets(remainingSet);
+            subsetsList.addAll(subsets);
+
+            // subsets adding the first element back in
+            subsets = getSubsets(remainingSet);
+            for (List<Integer> subset : subsets) {
+                subset.add(0, firstElement);
+            }
+
+            subsetsList.addAll(subsets);
+        }
+        return subsetsList;
     }
 
     /**
@@ -37,6 +83,10 @@ public class SubsetSumExhaustive implements SubsetSumExact {
         List<Integer> S = Arrays.asList(1, 2, 3, 9);
         int k = 4;
         boolean result = s.subsetExists(S, k);
+        System.out.println(result);
+
+        k = 8;
+        result = s.subsetExists(S, k);
         System.out.println(result);
     }
 }
