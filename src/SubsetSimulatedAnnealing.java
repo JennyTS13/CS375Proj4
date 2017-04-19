@@ -14,70 +14,18 @@ public class SubsetSimulatedAnnealing implements SubsetSumApprox {
         this.numRepetitions = numRepetitions;
     }
 
-    public void setNumRepetitions(int numRepetitions){
+    public void setNumRepetitions(int numRepetitions) {
         this.numRepetitions = numRepetitions;
     }
 
-
-    public List<Integer> getNeighbor(List<Integer> originalSet, List<Integer> s){
-        List<Integer> t = new ArrayList<>();
-        t.addAll(s);
-
-        int i = r.nextInt(originalSet.size());
-        int j = r.nextInt(originalSet.size());
-        while (j == i){
-            j = r.nextInt(originalSet.size());
-        }
-
-        if (s.contains(originalSet.get(i))){
-            t.remove(originalSet.get(i));
-        }
-        else{
-            t.add(originalSet.get(i));
-        }
-
-        if(s.contains(originalSet.get(j))){
-            if (r.nextInt(100)<50){
-                t.remove(originalSet.get(j));
-            }
-        }
-        else{
-            if (r.nextInt(100)<50){
-                t.add(originalSet.get(j));
-            }
-        }
-
-        return t;
-
-    }
-
-    public List<Integer> getRandomSubset(List<Integer> multiset){
-        List<Integer> subset = new ArrayList<>();
-        for (Integer item: multiset){
-            if (r.nextInt(100) < r.nextInt(100)){
-                subset.add(item);
-            }
-        }
-
-        return subset;
-    }
-
-    public int getSum(List<Integer> subset){
-        int sum = 0;
-        for (Integer i : subset){
-            sum += i;
-        }
-        return sum;
-    }
-
     public int subsetResidue(List<Integer> multiset, int sum){
-        List<Integer> randomSubset = this.getRandomSubset(multiset);
+        List<Integer> randomSubset = SubsetUtil.getRandomSubset(multiset);
         System.out.println(randomSubset);
         int smallestResidue = -1;
         for (int i = 0; i< this.numRepetitions; i++) {
-            List<Integer> neighbor = this.getNeighbor(multiset, randomSubset);
-            int neighborResidue = Math.abs(this.getSum(neighbor) - sum);
-            int residue = Math.abs(this.getSum(randomSubset) - sum);
+            List<Integer> neighbor = SubsetUtil.getNeighbor(multiset, randomSubset);
+            int neighborResidue = Math.abs(SubsetUtil.getSum(neighbor) - sum);
+            int residue = Math.abs(SubsetUtil.getSum(randomSubset) - sum);
             if (neighborResidue >= residue){  //TODO: 10000000000 is too large an int... ask Dale
                 double T = (neighborResidue - residue)/ (1000000000 * Math.pow(0.8,(i/300)));
                 if ( r.nextDouble() > Math.pow(Math.E, -T)){
