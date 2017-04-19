@@ -6,16 +6,8 @@ import java.util.List;
  */
 public class SubsetSumDynamicProgramming implements SubsetSumExact {
 
-    public int sum(List<Integer> set) {
-        int sum = 0;
-        for (Integer i : set) {
-            sum += i;
-        }
-        return sum;
-    }
-
     public boolean subsetExists(List<Integer> multiset, int sum){
-        int sumMultiset = this.sum(multiset);
+        int sumMultiset = SubsetUtil.getSum(multiset);
         boolean[][] q = new boolean[multiset.size()][sumMultiset +1];
         for (int j = 0; j< sumMultiset +1; j++) {
             q[0][j] = (multiset.get(0) == j);
