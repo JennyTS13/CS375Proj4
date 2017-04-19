@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * Created by Phoebe Hughes on 4/18/2017.
  */
-public class SubsetSimulatedAnnealing implements SubsetSumApprox {
+public class SubsetSimulatedAnnealing {
     private Random r = new Random();
     private int numRepetitions;
 

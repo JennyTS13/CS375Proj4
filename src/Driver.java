@@ -34,22 +34,22 @@ public class Driver {
      * @param version the name of the SubsetSum being tested
      * @param s the SubsetSum
      */
-    private static void test(String version, SubsetSumExact s) {
-        // warm up
-        s.subsetExists(S, k);
-
-        // finds if there exists a subset of the set S
-        // where the sum of its elements is equal to a specified sum k.
-        Timer.start();
-        boolean result = s.subsetExists(S, k);
-        Timer.stop();
-
-        // output the results
-        System.out.println("--------" + version + "----------");
-
-        // output the time needed to find the product
-        System.out.println("Time: " + Timer.getRuntime() + "ms");
-    }
+//    private static void test(String version, SubsetSumExact s) {
+//        // warm up
+//        s.subsetExists(S, k);
+//
+//        // finds if there exists a subset of the set S
+//        // where the sum of its elements is equal to a specified sum k.
+//        Timer.start();
+//        boolean result = s.subsetExists(S, k);
+//        Timer.stop();
+//
+//        // output the results
+//        System.out.println("--------" + version + "----------");
+//
+//        // output the time needed to find the product
+//        System.out.println("Time: " + Timer.getRuntime() + "ms");
+//    }
 
     public static void main(String[] args){
 

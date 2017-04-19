@@ -12,7 +12,7 @@ import java.util.*;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumGreedy implements SubsetSumApprox {
+public class SubsetSumGreedy {
 
     /**
      * Returns the residue, the absolute value of the difference between

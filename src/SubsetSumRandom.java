@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Random approach.
  */
-public class SubsetSumRandom implements SubsetSumApprox{
+public class SubsetSumRandom {
 
     private int repetitions;
 

@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumHillClimb implements SubsetSumApprox {
+public class SubsetSumHillClimb {
 
     /** number of repetitions **/
     private int reps;

@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Created by Phoebe Hughes on 4/18/2017.
  */
-public class SubsetSumDynamicProgramming implements SubsetSumExact {
+public class SubsetSumDynamicProgramming {
 
     public boolean subsetExists(List<Integer> multiset, int sum){
         int sumMultiset = SubsetUtil.getSum(multiset);
