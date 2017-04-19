@@ -19,11 +19,11 @@ public class SubsetSimulatedAnnealing implements SubsetSumApprox {
     }
 
     public int subsetResidue(List<Integer> multiset, int sum){
-        List<Integer> randomSubset = SubsetUtil.getRandomSubset(multiset);
+        List<Integer> randomSubset = SubsetUtil.genRandomSubset(multiset);
         System.out.println(randomSubset);
         int smallestResidue = -1;
         for (int i = 0; i< this.numRepetitions; i++) {
-            List<Integer> neighbor = SubsetUtil.getNeighbor(multiset, randomSubset);
+            List<Integer> neighbor = SubsetUtil.genNeighbor(multiset, randomSubset);
             int neighborResidue = Math.abs(SubsetUtil.getSum(neighbor) - sum);
             int residue = Math.abs(SubsetUtil.getSum(randomSubset) - sum);
             if (neighborResidue >= residue){  //TODO: 10000000000 is too large an int... ask Dale
