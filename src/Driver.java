@@ -124,17 +124,13 @@ public class Driver {
         int totalResidue = SubsetSumHillClimb.subsetResidue(S, k, reps);
         Timer.stop();
 
-        // output the results
-        System.out.println("--------Hill Climb----------");
-        System.out.println("Residue: " + totalResidue);
-
-
         //repeat to calculate average residue
         for(int i = 0; i < algoReps-1; i++){
             totalResidue += SubsetSumHillClimb.subsetResidue(S, k, reps);
         }
 
         // output the results
+        System.out.println("--------Hill Climb----------");
         System.out.println("Average Residue: " + ((double)totalResidue)/algoReps);
 
         // output the time needed to find the product
