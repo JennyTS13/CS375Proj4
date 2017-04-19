@@ -1,5 +1,5 @@
 /*
- * File:    SubsetSumExhaustive.java
+ * File:    SubsetSumGreedy.java
  * Authors: Charlie Beck, Phoebe Hughes, Tiffany Lam, Jenny Lin
  * Date:    April 21, 2017
  * Project: 4
