@@ -24,7 +24,7 @@ public class SubsetSumExhaustive {
      *
      * @return boolean indicating if such a subset exists
      */
-    public boolean subsetExists(List<Integer> multiset, int sum) {
+    public static boolean subsetExists(List<Integer> multiset, int sum) {
         List<List<Integer>> subsets = getSubsets(multiset);
         for (List<Integer> subset : subsets) {
             int k = 0;
@@ -45,7 +45,7 @@ public class SubsetSumExhaustive {
      *
      * @return A list of all subsets
      */
-    public List<List<Integer>> getSubsets(List<Integer> multiset) {
+    public static List<List<Integer>> getSubsets(List<Integer> multiset) {
         ArrayList<List<Integer>> subsetsList = new ArrayList<>();
         // base case
         if (multiset.size() == 0) {
@@ -77,14 +77,13 @@ public class SubsetSumExhaustive {
      * @param args
      */
     public static void main(String[] args) {
-        SubsetSumExhaustive s = new SubsetSumExhaustive();
         List<Integer> S = Arrays.asList(1, 2, 3, 9);
         int k = 4;
-        boolean result = s.subsetExists(S, k);
+        boolean result = subsetExists(S, k);
         System.out.println(result);
 
         k = 8;
-        result = s.subsetExists(S, k);
+        result = subsetExists(S, k);
         System.out.println(result);
     }
 }

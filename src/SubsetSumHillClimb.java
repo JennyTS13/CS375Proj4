@@ -16,28 +16,17 @@ import java.util.List;
  */
 public class SubsetSumHillClimb {
 
-    /** number of repetitions **/
-    private int reps;
-
-    /**
-     * Constructor
-     *
-     * @param reps number to times to compare with neighbors
-     */
-    public SubsetSumHillClimb(int reps){
-        this.reps = reps;
-    }
-
     /**
      * Returns the residue, the absolute value of the difference between
      * the sum of the subset and the desired sum.
      *
      * @param multiset list of integers in the multiset S
      * @param sum int indicating the specified sum k
+     * @param reps number to times to compare with neighbors
      *
      * @return double - the residue
      */
-    public int subsetResidue(List<Integer> multiset, int sum){
+    public static int subsetResidue(List<Integer> multiset, int sum, int reps){
         List<Integer> currSubset = SubsetUtil.genRandomSubset(multiset);
         int currResidue = SubsetUtil.getResidue(currSubset, sum);
         List<Integer> neighbor;
@@ -62,9 +51,8 @@ public class SubsetSumHillClimb {
      * @param args
      */
     public static void main(String[] args){
-        SubsetSumHillClimb subsetSumHillClimb = new SubsetSumHillClimb(20);
         List<Integer> intList = new ArrayList<>(Arrays.asList(1, 3, 9, 2, 7, 34, 8, 2, 45, 4));
-        int residue = subsetSumHillClimb.subsetResidue(intList, 15);
+        int residue = subsetResidue(intList, 15, 20);
         System.out.println(residue);
     }
 }

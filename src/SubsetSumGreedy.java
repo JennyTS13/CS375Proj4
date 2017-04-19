@@ -23,7 +23,7 @@ public class SubsetSumGreedy {
      *
      * @return double - the residue
      */
-    public int subsetResidue(List<Integer> multiset, int sum){
+    public static int subsetResidue(List<Integer> multiset, int sum){
         //Start with an empty subset of multiset S
         List<Integer> intSubset = new ArrayList<>();
         int subsetSum = 0;
