@@ -43,7 +43,8 @@ public class SubsetSumSimulatedAnnealing {
                 //calculates T using the given formula
                 double T = (neighborResidue - residue)/
                         (10000000000L  * Math.pow(0.8,(i/300)));
-                if ( r.nextDouble() > Math.pow(Math.E, -T)){
+                double eT = Math.pow(Math.E, -T);
+                if ( r.nextDouble() < eT){
                     subset = neighbor;
                 }
             }
