@@ -23,7 +23,7 @@ public class SubsetSumGreedy {
      *
      * @return double - the residue
      */
-    public static int subsetResidue(List<Integer> multiset, int sum){
+    public static long subsetResidue(List<Integer> multiset, long sum){
         //Start with an empty subset of multiset S
         List<Integer> intSubset = new ArrayList<>();
         int subsetSum = 0;
@@ -60,7 +60,7 @@ public class SubsetSumGreedy {
     public static void main(String[] args){
         SubsetSumGreedy subsetSumGreedy = new SubsetSumGreedy();
         List<Integer> intList = new ArrayList<>(Arrays.asList(2, 1, 2, 3));
-        int residue = subsetSumGreedy.subsetResidue(intList, 2);
+        long residue = subsetSumGreedy.subsetResidue(intList, 2);
         System.out.println(residue);
     }
 

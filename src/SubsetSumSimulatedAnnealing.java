@@ -15,7 +15,7 @@ import java.util.Random;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSimulatedAnnealing {
+public class SubsetSumSimulatedAnnealing {
 
 
     /**
@@ -27,15 +27,15 @@ public class SubsetSimulatedAnnealing {
      *
      * @return double - the residue
      */
-    public static int subsetResidue(List<Integer> multiset, int sum, int numRepetitions){
+    public static long subsetResidue(List<Integer> multiset, long sum, int numRepetitions){
         Random r = new Random();
         List<Integer> subset = SubsetUtil.genRandomSubset(multiset);
-        int smallestResidue = -1;
+        long smallestResidue = -1;
 
         for (int i = 0; i< numRepetitions; i++) {
             List<Integer> neighbor = SubsetUtil.genNeighbor(multiset, subset);
-            int neighborResidue = SubsetUtil.getResidue(neighbor, sum);
-            int residue = SubsetUtil.getResidue(subset, sum);
+            long neighborResidue = SubsetUtil.getResidue(neighbor, sum);
+            long residue = SubsetUtil.getResidue(subset, sum);
 
             //if neighbor has a larger or equal residue then it becomes the
             //subset with a probability of e^-T
@@ -75,7 +75,7 @@ public class SubsetSimulatedAnnealing {
      */
     public static void main(String[] args){
         List<Integer> S = Arrays.asList(1, 3, 9, 2, 7, 34);
-        int residue = SubsetSimulatedAnnealing.subsetResidue(S, 11, 100);
+        long residue = SubsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
         System.out.println("Residue: " + residue);
     }
 

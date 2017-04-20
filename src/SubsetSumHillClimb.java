@@ -26,11 +26,11 @@ public class SubsetSumHillClimb {
      *
      * @return double - the residue
      */
-    public static int subsetResidue(List<Integer> multiset, int sum, int reps){
+    public static long subsetResidue(List<Integer> multiset, long sum, int reps){
         List<Integer> currSubset = SubsetUtil.genRandomSubset(multiset);
-        int currResidue = SubsetUtil.getResidue(currSubset, sum);
+        long currResidue = SubsetUtil.getResidue(currSubset, sum);
         List<Integer> neighbor;
-        int neighborResidue;
+        long neighborResidue;
 
         for(int i = 0; i < reps; i++){
             neighbor = SubsetUtil.genNeighbor(multiset, currSubset);
@@ -52,7 +52,7 @@ public class SubsetSumHillClimb {
      */
     public static void main(String[] args){
         List<Integer> intList = new ArrayList<>(Arrays.asList(1, 3, 9, 2, 7, 34, 8, 2, 45, 4));
-        int residue = subsetResidue(intList, 15, 20);
+        long residue = subsetResidue(intList, 15, 20);
         System.out.println(residue);
     }
 }
