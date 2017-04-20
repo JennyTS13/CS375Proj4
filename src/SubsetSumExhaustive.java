@@ -40,40 +40,41 @@ public class SubsetSumExhaustive {
 
     public static boolean subsetExists(List<Long> multiset, int sum) {
         //empty set is a subset if sum = 0
-        if(sum == 0){
+        if (sum == 0){
             return true;
         }
 
         //Create a multiset and add all elements of the input multiset if
         //its element are less than or equal to the sum
-        List<Long> lesserMultiset = new ArrayList<>();
-        multiset.forEach(val -> {
-            if(val <= sum){
-                lesserMultiset.add(val);
+        List<Long> feasibleMultiset = new ArrayList<>();
+        for (int i = 0; i < multiset.size(); i++) {
+            long val = multiset.get(i);
+            if (val < sum) {
+                feasibleMultiset.add(val);
             }
-        });
-
-        //Create list of subsets of lesserMultiset
-        List<List<Long>> subsets = new ArrayList<>();
-        for(int i = 0; i < lesserMultiset.size(); i++){
             //return true if an element == sum
-            if(lesserMultiset.get(i) == sum){
+            else if (val == sum) {
                 return true;
             }
-            //add each individual element as a subset of lesserMultiset
-            subsets.add(Arrays.asList(lesserMultiset.get(i)));
         }
 
-        //Add an element of lesserMultiset to all subsets and
+        //Create list of subsets of feasibleMultiset
+        List<List<Long>> subsets = new ArrayList<>();
+        for(int i = 0; i < feasibleMultiset.size(); i++){
+            //add each individual element as a subset of feasibleMultiset
+            subsets.add(Arrays.asList(feasibleMultiset.get(i)));
+        }
+
+        //Add an element of feasibleMultiset to all subsets and
         //check if their sum matches the target sum
         List<Long> currSubset;
-        for(int i = 0; i < lesserMultiset.size(); i++){
-            for(int j = 0; j < lesserMultiset.size(); j++){
+        for(int i = 0; i < feasibleMultiset.size(); i++){
+            for(int j = 0; j < feasibleMultiset.size(); j++){
                 //Checking that we're not adding to subset that already holds
                 //the same element
                 if(i != j) {
                     currSubset = subsets.get(j);
-                    currSubset.add(lesserMultiset.get(i));
+                    currSubset.add(feasibleMultiset.get(i));
 
                     //Return true, we've found matching subset
                     if(SubsetUtil.getSum(currSubset) == sum){
