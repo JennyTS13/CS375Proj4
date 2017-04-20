@@ -30,7 +30,7 @@ public class SubsetSumSimulatedAnnealing {
     public static long subsetResidue(List<Long> multiset, long sum, int numRepetitions){
         Random r = new Random();
         List<Long> subset = SubsetUtil.genRandomSubset(multiset);
-        long smallestResidue = -1;
+        long smallestResidue = SubsetUtil.getResidue(subset, sum);
 
         for (int i = 0; i< numRepetitions; i++) {
             List<Long> neighbor = SubsetUtil.genNeighbor(multiset, subset);
@@ -51,16 +51,8 @@ public class SubsetSumSimulatedAnnealing {
                 subset = neighbor;
             }
 
-            //updates the smallest residue
-            if (smallestResidue < 0 ){
-                if (neighborResidue < residue){
-                    smallestResidue = neighborResidue;
-                }
-                else{
-                    smallestResidue = residue;
-                }
-            }
-            else if (neighborResidue < smallestResidue){
+            //update residues
+            if (neighborResidue < smallestResidue){
                 smallestResidue = neighborResidue;
             }
         }

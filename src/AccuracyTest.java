@@ -81,7 +81,7 @@ public class AccuracyTest {
         long k = 25* maxSize;
         int numSets = 50;
 
-        int[] repsOpts = {10, 100, 1_000, 5_000, 10_000};
+        int[] repsOpts = {100, 1_000, 5_000, 10_000, 50_000, 100_000};
         String[] algos = {"Greedy:     ", "Hill Climb: ", "Random:     ", "Annealing:  " };
 
         long[][][] output = getResults(size, maxSize, k, numSets, repsOpts);
