@@ -84,6 +84,29 @@ public class Driver {
     }
 
     /**
+     * Tests a SubsetSum - Dynamic Programming
+     */
+    private static void testDynamic() {
+        //run dynamic programming algo 5 times for warm up
+        for(int i = 0; i < 5; i++){
+            SubsetSumDynamicProgramming.subsetExists(S, k);
+        }
+
+        // finds if there exists a subset of the set S
+        // where the sum of its elements is equal to a specified sum k.
+        Timer.start();
+        boolean result = SubsetSumDynamicProgramming.subsetExists(S, k);
+        Timer.stop();
+
+        // output the results
+        System.out.println("--------Dynamic Programming----------");
+        System.out.println("Subset found: " + result);
+
+        // output the time needed to find the product
+        System.out.println("Time: " + Timer.getRuntime() + "ms");
+    }
+
+    /**
      * Tests a SubsetSum - Greedy approach
      */
     private static void testGreedy() {
@@ -137,6 +160,37 @@ public class Driver {
         System.out.println("Time: " + Timer.getRuntime() + "ms");
     }
 
+    /**
+     * Tests a SubsetSum - Simulated Annealing approach
+     *
+     * @param algoReps number of times to run algorithm for average residue
+     * @param reps number to times to compare with neighbors
+     */
+    private static void testSimulatedAnnealing(int algoReps, int reps) {
+        //run simulated annealing algo 5 times for warm up
+        for(int i = 0; i < 5; i++){
+            SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+        }
+
+        // finds if there exists a subset of the set S
+        // where the sum of its elements is equal to a specified sum k.
+        Timer.start();
+        int totalResidue = SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+        Timer.stop();
+
+        //repeat to calculate average residue
+        for(int i = 0; i < algoReps-1; i++){
+            totalResidue += SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+        }
+
+        // output the results
+        System.out.println("--------Simulated Annealing----------");
+        System.out.println("Average Residue: " + ((double)totalResidue)/algoReps);
+
+        // output the time needed to find the product
+        System.out.println("Time: " + Timer.getRuntime() + "ms");
+    }
+
     public static void main(String[] args){
         int numElements = 10_000;
         int max = 10_000;
@@ -146,5 +200,7 @@ public class Driver {
         // testExhaustive();
         testGreedy();
         testHillClimb(10, 100_000);
+        testDynamic();
+        testSimulatedAnnealing(10, 100_000);
     }
 }
