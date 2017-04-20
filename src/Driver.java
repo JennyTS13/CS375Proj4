@@ -66,6 +66,26 @@ public class Driver {
         System.out.println("Time: " + Timer.getRuntime() + "ms");
     }
 
+    private static void testExhaustiveFaster() {
+        //run exhaustive algo 5 times for warm up
+        for(int i = 0; i < 5; i++){
+            SubsetSumExhaustiveFaster.subsetExists(S, k);
+        }
+
+        // finds if there exists a subset of the set S
+        // where the sum of its elements is equal to a specified sum k.
+        Timer.start();
+        boolean result = SubsetSumExhaustiveFaster.subsetExists(S, k);
+        Timer.stop();
+
+        // output the results
+        System.out.println("--------Exhaustive Faster----------");
+        System.out.println("Subset found: " + result);
+
+        // output the time needed to find the product
+        System.out.println("Time: " + Timer.getRuntime() + "ms");
+    }
+
     /**
      * Tests a SubsetSum - Dynamic Programming
      */

@@ -40,8 +40,9 @@ public class SubsetSumDynamicProgramming {
         boolean[][] q = new boolean[multiset.size()][numCols.intValue()];
 
         // q[0][s] = (x1 == s)
-        for (int j = 0; j< numCols; j++) {
-            q[0][j] = (multiset.get(0) == j);
+        Long x0 = multiset.get(0);
+        if (x0 <= sum){
+            q[0][x0.intValue()] = true;
         }
 
         // for i > 0, q[i][s] = q[i-1][s] or (xi==s) or q[i-1][s-xi]
@@ -67,7 +68,15 @@ public class SubsetSumDynamicProgramming {
      * @param args
      */
     public static void main(String[] args){
-        List<Long> S = Arrays.asList(1L, 3L, 9L, 2L);
-        System.out.println("Result: " + SubsetSumDynamicProgramming.subsetExists(S, 4));
+        List<Long> S = Arrays.asList(2L, 3L, 9L, 1L);
+        System.out.println("Result 4: " + SubsetSumDynamicProgramming.subsetExists(S, 4));
+
+        System.out.println("Result 11: " + SubsetSumDynamicProgramming.subsetExists(S, 11));
+
+        System.out.println("Result 1: " + SubsetSumDynamicProgramming.subsetExists(S, 1));
+
+        System.out.println("Result 7: " + SubsetSumDynamicProgramming.subsetExists(S, 7));
+
+        System.out.println("Result 8: " + SubsetSumDynamicProgramming.subsetExists(S, 8));
     }
 }
