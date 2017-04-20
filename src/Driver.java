@@ -190,17 +190,24 @@ public class Driver {
 
     public static void main(String[] args){
         int[] numElements = {10, 100, 1_000, 10_000};
+        int[] repsOpts = {100, 1_000, 5_000, 10_000, 50_000, 100_000};
+
         int max = 10_000;
         //do not use max size greater than int max size, you will lose data in
         //dynamic programing with casting long to int
 
         int maxSum = 100_000;
-        initialize(numElements[1], max, maxSum);
-        // test exhaustive with 20, 50, 200 as params ~2 seconds
-        // testExhaustive();
-        testGreedy();
-        testHillClimb(100_000);
-        testDynamic();
-        testSimulatedAnnealing(100_000);
+        for (int i = 0; i < numElements.length; i++) {
+            for (int j = 0; j < repsOpts.length; j++) {
+                initialize(numElements[i], max, maxSum);
+                // test exhaustive with 20, 50, 200 as params ~2 seconds
+                // testExhaustive();
+                testGreedy();
+                testHillClimb(repsOpts[j]);
+                testDynamic();
+                testSimulatedAnnealing(repsOpts[j]);
+            }
+        }
+
     }
 }
