@@ -43,7 +43,7 @@ public class SubsetSumDynamicProgramming {
         for (int j = 0; j< numCols; j++) {
             q[0][j] = (multiset.get(0) == j);
         }
-        long temp = 1;
+
         // for i > 0, q[i][s] = q[i-1][s] or (xi==s) or q[i-1][s-xi]
         for (int i = 1; i<multiset.size(); i ++){
             for (int s = 0; s< numCols; s++) {
