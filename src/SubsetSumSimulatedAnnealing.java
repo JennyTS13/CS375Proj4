@@ -31,11 +31,12 @@ public class SubsetSumSimulatedAnnealing {
         Random r = new Random();
         List<Long> subset = SubsetUtil.genRandomSubset(multiset);
         long smallestResidue = SubsetUtil.getResidue(subset, sum);
+        long residue = smallestResidue;
+        long neighborResidue = 0;
 
         for (int i = 0; i< numRepetitions; i++) {
             List<Long> neighbor = SubsetUtil.genNeighbor(multiset, subset);
-            long neighborResidue = SubsetUtil.getResidue(neighbor, sum);
-            long residue = SubsetUtil.getResidue(subset, sum);
+            neighborResidue = SubsetUtil.getResidue(neighbor, sum);
 
             //if neighbor has a larger or equal residue then it becomes the
             //subset with a probability of e^-T
@@ -46,10 +47,12 @@ public class SubsetSumSimulatedAnnealing {
                 double eT = Math.pow(Math.E, -T);
                 if ( r.nextDouble() < eT){
                     subset = neighbor;
+                    residue = neighborResidue;
                 }
             }
             else{ // neighborResidue < residue, then neighbor becomes subset
                 subset = neighbor;
+                residue = neighborResidue;
             }
 
             //update residues
