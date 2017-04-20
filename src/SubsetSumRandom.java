@@ -25,8 +25,8 @@ public class SubsetSumRandom {
      *
      * @return lowestRes - the residue
      */
-    public static long subsetResidue(List<Integer> multiset, long sum, int numReps){
-        List<Integer> current;
+    public static long subsetResidue(List<Long> multiset, long sum, int numReps){
+        List<Long> current;
         long curRes = sum;
         long lowestRes = sum;
 
@@ -46,7 +46,7 @@ public class SubsetSumRandom {
      * @param args
      */
     public static void main(String[] args){
-        List<Integer> intList = new ArrayList<>(Arrays.asList(2, 1, 2, 3));
+        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 2L, 3L));
         long residue = SubsetSumRandom.subsetResidue(intList, 7, 3);
         System.out.println(residue);
     }

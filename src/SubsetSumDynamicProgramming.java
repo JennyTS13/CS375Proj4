@@ -24,9 +24,9 @@ public class SubsetSumDynamicProgramming {
      *
      * @return boolean indicating if such a subset exists
      */
-    public static boolean subsetExists(List<Integer> multiset, int sum){
-        int sumMultiset = SubsetUtil.getSum(multiset);
-        boolean[][] q = new boolean[multiset.size()][sumMultiset +1];
+    public static boolean subsetExists(List<Long> multiset, int sum){
+        Long sumMultiset = SubsetUtil.getSum(multiset);
+        boolean[][] q = new boolean[multiset.size()][sumMultiset.intValue() +1];
 
         // q[0][s] = (x1 == s)
         for (int j = 0; j< sumMultiset +1; j++) {
@@ -42,7 +42,7 @@ public class SubsetSumDynamicProgramming {
                 if (s - multiset.get(i) >= 0) { // if s-xi > 0
                     //true if calculated value above is true or
                     // the set without the current value, xi, has a sum of s - xi
-                    q[i][s] = q[i][s] || (q[i - 1][s - multiset.get(i)]);
+                    q[i][s] = q[i][s] || (q[i - 1][s - multiset.get(i).intValue()]);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class SubsetSumDynamicProgramming {
      * @param args
      */
     public static void main(String[] args){
-        List<Integer> S = Arrays.asList(1, 3, 9, 2);
+        List<Long> S = Arrays.asList(1L, 3L, 9L, 2L);
         System.out.println("Result: " + SubsetSumDynamicProgramming.subsetExists(S, 5));
     }
 }

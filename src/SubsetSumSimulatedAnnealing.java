@@ -27,13 +27,13 @@ public class SubsetSumSimulatedAnnealing {
      *
      * @return double - the residue
      */
-    public static long subsetResidue(List<Integer> multiset, long sum, int numRepetitions){
+    public static long subsetResidue(List<Long> multiset, long sum, int numRepetitions){
         Random r = new Random();
-        List<Integer> subset = SubsetUtil.genRandomSubset(multiset);
+        List<Long> subset = SubsetUtil.genRandomSubset(multiset);
         long smallestResidue = -1;
 
         for (int i = 0; i< numRepetitions; i++) {
-            List<Integer> neighbor = SubsetUtil.genNeighbor(multiset, subset);
+            List<Long> neighbor = SubsetUtil.genNeighbor(multiset, subset);
             long neighborResidue = SubsetUtil.getResidue(neighbor, sum);
             long residue = SubsetUtil.getResidue(subset, sum);
 
@@ -74,7 +74,7 @@ public class SubsetSumSimulatedAnnealing {
      * @param args
      */
     public static void main(String[] args){
-        List<Integer> S = Arrays.asList(1, 3, 9, 2, 7, 34);
+        List<Long> S = Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L);
         long residue = SubsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
         System.out.println("Residue: " + residue);
     }

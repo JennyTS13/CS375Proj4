@@ -5,6 +5,8 @@
  * Project: 4
  */
 
+import sun.rmi.runtime.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -22,9 +24,9 @@ public class SubsetUtil {
      *
      * @return list of integers that is a neighbor of the provided set
      */
-    public static List<Integer> genNeighbor(List<Integer> multiset, List<Integer> subset){
+    public static List<Long> genNeighbor(List<Long> multiset, List<Long> subset){
         //Initialize the neighbor set to be a clone of the subset
-        List<Integer> neighborSet = new ArrayList<>(subset);
+        List<Long> neighborSet = new ArrayList<>(subset);
 
         //Selecting random i, j
         Random rand = new Random();
@@ -36,8 +38,8 @@ public class SubsetUtil {
             j = rand.nextInt(multiset.size());
         }
 
-        Integer x_i = multiset.get(i);
-        Integer x_j = multiset.get(j);
+        Long x_i = multiset.get(i);
+        Long x_j = multiset.get(j);
 
         //If x_i is in the subset, remove it from the neighbor set
         //Otherwise, add x_i to the neighbor set
@@ -70,12 +72,12 @@ public class SubsetUtil {
      * @param multiset list of integers in the multiset S
      * @return random list of integers (subset) of multiset S
      */
-    public static List<Integer> genRandomSubset(List<Integer> multiset){
+    public static List<Long> genRandomSubset(List<Long> multiset){
         Random rand = new Random();
-        List<Integer> subset = new ArrayList<>();
+        List<Long> subset = new ArrayList<>();
 
         //randomly add elements of the multiset to the subset
-        for (Integer item: multiset){
+        for (Long item: multiset){
             if (rand.nextFloat() < rand.nextFloat()){
                 subset.add(item);
             }
@@ -91,9 +93,9 @@ public class SubsetUtil {
      * @param sum int indicating the specified sum k
      * @return residue of the provided list (multiset)
      */
-    public static long getResidue(List<Integer> multiset, long sum){
+    public static long getResidue(List<Long> multiset, long sum){
         long residue = sum;
-        for(int val: multiset){
+        for(Long val: multiset){
             residue -= val;
         }
         return Math.abs(residue);
@@ -105,9 +107,9 @@ public class SubsetUtil {
      * @param multiset list of integers in the multiset
      * @return sum of the elements in the provided list (multiset)
      */
-    public static int getSum(List<Integer> multiset){
-        int sum = 0;
-        for (Integer i : multiset){
+    public static long getSum(List<Long> multiset){
+        long sum = 0;
+        for (Long i : multiset){
             sum += i;
         }
         return sum;
@@ -120,11 +122,12 @@ public class SubsetUtil {
      * @param max the max of the range of added elements
      * @return generated multiset
      */
-    public static List<Integer> genRandomMultiSet(int numElements, int max) {
-        List<Integer> multiset = new ArrayList<>();
+    public static List<Long> genRandomMultiSet(int numElements, long max) {
+        List<Long> multiset = new ArrayList<>();
         Random rand = new Random();
         for(int i = 0; i < numElements; i++) {
-            multiset.add(rand.nextInt(max) + 1);
+            long l = (long) (rand.nextFloat() * max + 1);
+            multiset.add(l);
         }
         return multiset;
     }

@@ -134,7 +134,7 @@ public class SubsetSumExhaustive {
      * @param args
      */
     public static void main(String[] args) {
-        List<Integer> S = Arrays.asList(1, 2, 3, 9);
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         int k = 4;
         boolean result = subsetExists(S, k);
         System.out.println(result);

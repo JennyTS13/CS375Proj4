@@ -18,7 +18,7 @@ public class Driver {
     /**
      * The multiset S
      */
-    static List<Integer> S;
+    static List<Long> S;
 
     /**
      * The sum k
@@ -177,6 +177,9 @@ public class Driver {
     public static void main(String[] args){
         int numElements = 10_000;
         int max = 10_000;
+        //do not use max size greater than int max size, you will lose data in
+        //dynamic programing with casting long to int
+
         int maxSum = 100_000;
         initialize(numElements, max, maxSum);
         // test exhaustive with 20, 50, 200 as params ~2 seconds

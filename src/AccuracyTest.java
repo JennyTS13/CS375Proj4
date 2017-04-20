@@ -53,13 +53,13 @@ public class AccuracyTest {
      * @param repsOpts the number of reps the algos
      * @return the residues
      */
-    private static long[][][] getResults(int size, int maxSize, long k,
+    private static long[][][] getResults(int size, long maxSize, long k,
                                          int numSets, int[] repsOpts) {
         long[][][] output = new long[repsOpts.length][4][numSets];
         for (int j = 0; j < repsOpts.length; j++) {
             int numReps = repsOpts[j];
             for (int i = 0; i < numSets; i++) {
-                List<Integer> multiSet = SubsetUtil.genRandomMultiSet(size, maxSize);
+                List<Long> multiSet = SubsetUtil.genRandomMultiSet(size, maxSize);
                 output[j][0][i] = SubsetSumGreedy.subsetResidue(multiSet, k);
                 output[j][1][i] = SubsetSumHillClimb.subsetResidue(multiSet, k, numReps);
                 output[j][2][i] = SubsetSumRandom.subsetResidue(multiSet, k, numReps);
@@ -77,12 +77,12 @@ public class AccuracyTest {
      */
     public static void main(String[] args){
         int size = 100;
-        int maxSize = (int)Math.pow(10, 12);
+        long maxSize = (long)Math.pow(10, 12);
         long k = 25* maxSize;
         int numSets = 50;
 
         int[] repsOpts = {10, 100, 1_000, 5_000, 10_000};
-        String[] algos = {"Greedy: ", "Hill Climb: ", "Random: ", "Annealing: " };
+        String[] algos = {"Greedy:     ", "Hill Climb: ", "Random:     ", "Annealing:  " };
 
         long[][][] output = getResults(size, maxSize, k, numSets, repsOpts);
         //[repOpt][algo#][numSet]
