@@ -25,7 +25,7 @@ public class SubsetSumExhaustive {
      * @return boolean indicating if such a subset exists
      */
     public static boolean subsetExists(List<Integer> multiset, int sum) {
-        List<List<Integer>> subsets = getSubsets(multiset);
+        List<List<Integer>> subsets = getSubsets(multiset, sum);
         for (List<Integer> subset : subsets) {
             int k = 0;
             for (int val : subset) {
@@ -45,7 +45,7 @@ public class SubsetSumExhaustive {
      *
      * @return A list of all subsets
      */
-    public static List<List<Integer>> getSubsets(List<Integer> multiset) {
+    public static List<List<Integer>> getSubsets(List<Integer> multiset, int sum) {
         ArrayList<List<Integer>> subsetsList = new ArrayList<>();
         // base case
         if (multiset.size() == 0) {
@@ -53,15 +53,23 @@ public class SubsetSumExhaustive {
         }
         else {
             List<Integer> remainingSet = new ArrayList<>();
-            remainingSet.addAll(multiset);
+            List<Integer> set = new ArrayList<>(multiset);
+
+            // remove values greater than the sum
+            for (int i = 0; i < set.size(); i++) {
+                if (set.get(i) > sum) {
+                    set.remove(i);
+                }
+            }
+            remainingSet.addAll(set);
 
             // recursively removes first element and finds subsets
             int firstElement = remainingSet.remove(0);
-            List<List<Integer>> subsets = getSubsets(remainingSet);
+            List<List<Integer>> subsets = getSubsets(remainingSet, sum);
             subsetsList.addAll(subsets);
 
             // subsets adding the first element back in
-            subsets = getSubsets(remainingSet);
+            subsets = getSubsets(remainingSet, sum);
             for (List<Integer> subset : subsets) {
                 subset.add(0, firstElement);
             }
