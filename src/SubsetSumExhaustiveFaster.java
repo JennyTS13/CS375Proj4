@@ -44,7 +44,8 @@ public class SubsetSumExhaustiveFaster {
     }
 
     /**
-     * Finds all subsets of a given multiset S
+     * Finds all subsets of a given multiset S,
+     * until you find a subset whose sum = target sum
      *
      * @param multiset List of integers in the multiset S
      *

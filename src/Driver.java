@@ -228,6 +228,5 @@ public class Driver {
                 testSimulatedAnnealing(repsOpts[j]);
             }
         }
-
     }
 }
