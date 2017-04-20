@@ -1,33 +1,61 @@
+/*
+ * File:    SubsetSumDynamicProgramming.java
+ * Authors: Charlie Beck, Phoebe Hughes, Tiffany Lam, Jenny Lin
+ * Date:    April 21, 2017
+ * Project: 4
+ */
+
 import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by Phoebe Hughes on 4/18/2017.
+ * Determines if there exists a subset of the set S where
+ * the sum of its elements is equal to a specified sum k.
  */
 public class SubsetSumDynamicProgramming {
 
-    public boolean subsetExists(List<Integer> multiset, int sum){
+
+    /**
+     * Determines if there exists a subset of the multiset in which the sum is the
+     * indicated sum using dynamic programming.
+     *
+     * @param multiset List of integers in the multiset S
+     * @param sum int indicating the specified sum k
+     *
+     * @return boolean indicating if such a subset exists
+     */
+    public static boolean subsetExists(List<Integer> multiset, int sum){
         int sumMultiset = SubsetUtil.getSum(multiset);
         boolean[][] q = new boolean[multiset.size()][sumMultiset +1];
+
+        // q[0][s] = (x1 == s)
         for (int j = 0; j< sumMultiset +1; j++) {
             q[0][j] = (multiset.get(0) == j);
         }
 
+        // for i > 0, q[i][s] = q[i-1][s] or (xi==s) or q[i-1][s-xi]
         for (int i = 1; i<multiset.size(); i ++){
-            for (int j = 0; j< sumMultiset +1 ; j++) {
-                q[i][j] = ((q[i - 1][j]) || (multiset.get(i) == j));
-                if (j - multiset.get(i) >= 0) {
-                    q[i][j] = q[i][j] || (q[i - 1][j - multiset.get(i)]);
+            for (int s = 0; s< sumMultiset +1 ; s++) {
+                // true if set without the current value, xi, has the sum s or xi == s
+                q[i][s] = ((q[i - 1][s]) || (multiset.get(i) == s));
+
+                if (s - multiset.get(i) >= 0) { // if s-xi > 0
+                    //true if calculated value above is true or
+                    // the set without the current value, xi, has a sum of s - xi
+                    q[i][s] = q[i][s] || (q[i - 1][s - multiset.get(i)]);
                 }
             }
         }
-
         return  q[multiset.size()-1][sum];
     }
 
+    /**
+     * Used to test the Dynamic programing method of finding whether a subset exists
+     * with a given sum
+     * @param args
+     */
     public static void main(String[] args){
-        SubsetSumDynamicProgramming subsetSumDynamicProgramming = new SubsetSumDynamicProgramming();
         List<Integer> S = Arrays.asList(1, 3, 9, 2);
-        System.out.println("Result: " + subsetSumDynamicProgramming.subsetExists(S, 5));
+        System.out.println("Result: " + SubsetSumDynamicProgramming.subsetExists(S, 5));
     }
 }
