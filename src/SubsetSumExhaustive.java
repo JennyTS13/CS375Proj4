@@ -25,13 +25,20 @@ public class SubsetSumExhaustive {
      * @return boolean indicating if such a subset exists
      */
     public static boolean subsetExists(List<Long> multiset, int sum) {
-        List<List<Long>> subsets = getSubsets(multiset, sum);
-        for (List<Long> subset : subsets) {
-            int k = 0;
-            for (long val : subset) {
-                k += val;
+        List<Long> feasibleMultiset = new ArrayList<>(multiset);
+
+        // remove values greater than the sum
+        for (int i = 0; i < feasibleMultiset.size(); i++) {
+            if (feasibleMultiset.get(i) > sum) {
+                feasibleMultiset.remove(i);
             }
-            if (k == sum) {
+        }
+
+        // get all subsets of the feasible multiset
+        List<List<Long>> subsets = getSubsets(feasibleMultiset, sum);
+        // for each possible subset, check to see if its sum = target sum
+        for (List<Long> subset : subsets) {
+            if (SubsetUtil.getSum(subset) == sum) {
                 return true;
             }
         }
@@ -53,15 +60,7 @@ public class SubsetSumExhaustive {
         }
         else {
             List<Long> remainingSet = new ArrayList<>();
-            List<Long> set = new ArrayList<>(multiset);
-
-            // remove values greater than the sum
-            for (int i = 0; i < set.size(); i++) {
-                if (set.get(i) > sum) {
-                    set.remove(i);
-                }
-            }
-            remainingSet.addAll(set);
+            remainingSet.addAll(multiset);
 
             // recursively removes first element and finds subsets
             long firstElement = remainingSet.remove(0);
@@ -86,7 +85,7 @@ public class SubsetSumExhaustive {
      */
     public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
-        int k = 4;
+        int k = 8;
         boolean result = subsetExists(S, k);
         System.out.println(result);
 
