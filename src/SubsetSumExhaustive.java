@@ -53,15 +53,15 @@ public class SubsetSumExhaustive {
         }
         else {
             List<Long> remainingSet = new ArrayList<>();
-            List<Long> set = new ArrayList<>(multiset);
+            List<Long> feasibleMultiset = new ArrayList<>(multiset);
 
             // remove values greater than the sum
-            for (int i = 0; i < set.size(); i++) {
-                if (set.get(i) > sum) {
-                    set.remove(i);
+            for (int i = 0; i < feasibleMultiset.size(); i++) {
+                if (feasibleMultiset.get(i) > sum) {
+                    feasibleMultiset.remove(i);
                 }
             }
-            remainingSet.addAll(set);
+            remainingSet.addAll(feasibleMultiset);
 
             // recursively removes first element and finds subsets
             long firstElement = remainingSet.remove(0);
