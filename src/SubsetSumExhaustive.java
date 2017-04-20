@@ -24,17 +24,65 @@ public class SubsetSumExhaustive {
      *
      * @return boolean indicating if such a subset exists
      */
-    public static boolean subsetExists(List<Integer> multiset, int sum) {
-        List<List<Integer>> subsets = getSubsets(multiset, sum);
-        for (List<Integer> subset : subsets) {
-            int k = 0;
-            for (int val : subset) {
-                k += val;
+//    public static boolean subsetExists(List<Integer> multiset, int sum) {
+//        List<List<Integer>> subsets = getSubsets(multiset, sum);
+//        for (List<Integer> subset : subsets) {
+//            int k = 0;
+//            for (int val : subset) {
+//                k += val;
+//            }
+//            if (k == sum) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    public static boolean subsetExists(List<Long> multiset, int sum) {
+        //empty set is a subset if sum = 0
+        if(sum == 0){
+            return true;
+        }
+
+        //Create a multiset and add all elements of the input multiset if
+        //its element are less than or equal to the sum
+        List<Long> lesserMultiset = new ArrayList<>();
+        multiset.forEach(val -> {
+            if(val <= sum){
+                lesserMultiset.add(val);
             }
-            if (k == sum) {
+        });
+
+        //Create list of subsets of lesserMultiset
+        List<List<Long>> subsets = new ArrayList<>();
+        for(int i = 0; i < lesserMultiset.size(); i++){
+            //return true if an element == sum
+            if(lesserMultiset.get(i) == sum){
                 return true;
             }
+            //add each individual element as a subset of lesserMultiset
+            subsets.add(Arrays.asList(lesserMultiset.get(i)));
         }
+
+        //Add an element of lesserMultiset to all subsets and
+        //check if their sum matches the target sum
+        List<Long> currSubset;
+        for(int i = 0; i < lesserMultiset.size(); i++){
+            for(int j = 0; j < lesserMultiset.size(); j++){
+                //Checking that we're not adding to subset that already holds
+                //the same element
+                if(i != j) {
+                    currSubset = subsets.get(j);
+                    currSubset.add(lesserMultiset.get(i));
+
+                    //Return true, we've found matching subset
+                    if(SubsetUtil.getSum(currSubset) == sum){
+                        return true;
+                    }
+                }
+            }
+        }
+
         return false;
     }
 
