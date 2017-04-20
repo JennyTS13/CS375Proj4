@@ -34,7 +34,9 @@ public class SubsetSumExhaustive {
             }
         }
 
+        // get all subsets of the feasible multiset
         List<List<Long>> subsets = getSubsets(feasibleMultiset, sum);
+        // for each possible subset, check to see if its sum = target sum
         for (List<Long> subset : subsets) {
             if (SubsetUtil.getSum(subset) == sum) {
                 return true;
