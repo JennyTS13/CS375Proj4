@@ -222,6 +222,7 @@ public class Driver {
                 initialize(numElements[i], max, maxSum);
                 // test exhaustive with 20, 50, 200 as params ~2 seconds
                 // testExhaustive();
+                //testExhaustiveFaster();
                 testGreedy();
                 testHillClimb(repsOpts[j]);
                 testDynamic();
