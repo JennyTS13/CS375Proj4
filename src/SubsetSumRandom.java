@@ -16,13 +16,6 @@ import java.util.List;
  */
 public class SubsetSumRandom {
 
-    private int repetitions;
-
-    /** Constructor **/
-    public SubsetSumRandom(){
-        this.repetitions = 3;
-    }
-
     /**
      * Returns the residue, the absolute value of the difference between
      * the sum of the subset and the desired sum.
@@ -32,13 +25,12 @@ public class SubsetSumRandom {
      *
      * @return lowestRes - the residue
      */
-    public int subsetResidue(List<Integer> multiset, int sum){
-        System.out.println("Number of repetitions: " + this.repetitions);
+    public static long subsetResidue(List<Integer> multiset, long sum, int numReps){
         List<Integer> current;
-        int curRes = sum;
-        int lowestRes = sum;
+        long curRes = sum;
+        long lowestRes = sum;
 
-        for (int i = 0; i < this.repetitions; i++){
+        for (int i = 0; i < numReps; i++){
             current = SubsetUtil.genRandomSubset(multiset);
             curRes = SubsetUtil.getResidue(current, sum);
             if (curRes <= lowestRes){
@@ -49,32 +41,13 @@ public class SubsetSumRandom {
     }
 
     /**
-     * Sets the number of repetitions needed for the Random algorithm
-     *
-     * @param x number of repetitions
-     */
-    public void setRepetitions(int x){
-        this.repetitions = x;
-    }
-
-
-    /**
-     * Returns the number of repetitions that the Random algorithm will execute
-     *
-     * @return number of repetitions
-     */
-    public int getRepetitions() { return this.repetitions; }
-
-
-    /**
      * Used to test Subset Sum (Random approach)
      *
      * @param args
      */
     public static void main(String[] args){
-        SubsetSumRandom subsetSumRandom = new SubsetSumRandom();
         List<Integer> intList = new ArrayList<>(Arrays.asList(2, 1, 2, 3));
-        int residue = subsetSumRandom.subsetResidue(intList, 7);
+        long residue = SubsetSumRandom.subsetResidue(intList, 7, 3);
         System.out.println(residue);
     }
 }

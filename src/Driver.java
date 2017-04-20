@@ -39,25 +39,8 @@ public class Driver {
      * @param maxSum max of the range of the sum
      */
     private static void initialize(int numElements, int max, int maxSum) {
-        S = genRandomMultiSet(numElements, max);
+        S = SubsetUtil.genRandomMultiSet(numElements, max);
         k = (new Random()).nextInt(maxSum);
-    }
-
-
-    /**
-     * Generates a multiset such that it has the specified number of elements
-     * within the specified range
-     * @param numElements number of elements that will be in multiset S
-     * @param max the max of the range of added elements
-     * @return generated multiset
-     */
-    private static List<Integer> genRandomMultiSet(int numElements, int max) {
-        List<Integer> multiset = new ArrayList<>();
-        Random rand = new Random();
-        for(int i = 0; i < numElements; i++) {
-            multiset.add(rand.nextInt(max));
-        }
-        return multiset;
     }
 
     /**
@@ -118,7 +101,7 @@ public class Driver {
         // finds if there exists a subset of the set S
         // where the sum of its elements is equal to a specified sum k.
         Timer.start();
-        int residue = SubsetSumGreedy.subsetResidue(S, k);
+        long residue = SubsetSumGreedy.subsetResidue(S, k);
         Timer.stop();
 
         // output the results
@@ -144,7 +127,7 @@ public class Driver {
         // finds if there exists a subset of the set S
         // where the sum of its elements is equal to a specified sum k.
         Timer.start();
-        int totalResidue = SubsetSumHillClimb.subsetResidue(S, k, reps);
+        long totalResidue = SubsetSumHillClimb.subsetResidue(S, k, reps);
         Timer.stop();
 
         //repeat to calculate average residue
@@ -169,18 +152,18 @@ public class Driver {
     private static void testSimulatedAnnealing(int algoReps, int reps) {
         //run simulated annealing algo 5 times for warm up
         for(int i = 0; i < 5; i++){
-            SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+            SubsetSumSimulatedAnnealing.subsetResidue(S, k, reps);
         }
 
         // finds if there exists a subset of the set S
         // where the sum of its elements is equal to a specified sum k.
         Timer.start();
-        int totalResidue = SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+        long totalResidue = SubsetSumSimulatedAnnealing.subsetResidue(S, k, reps);
         Timer.stop();
 
         //repeat to calculate average residue
         for(int i = 0; i < algoReps-1; i++){
-            totalResidue += SubsetSimulatedAnnealing.subsetResidue(S, k, reps);
+            totalResidue += SubsetSumSimulatedAnnealing.subsetResidue(S, k, reps);
         }
 
         // output the results

@@ -91,8 +91,8 @@ public class SubsetUtil {
      * @param sum int indicating the specified sum k
      * @return residue of the provided list (multiset)
      */
-    public static int getResidue(List<Integer> multiset, int sum){
-        int residue = sum;
+    public static long getResidue(List<Integer> multiset, long sum){
+        long residue = sum;
         for(int val: multiset){
             residue -= val;
         }
@@ -111,5 +111,21 @@ public class SubsetUtil {
             sum += i;
         }
         return sum;
+    }
+
+    /**
+     * Generates a multiset such that it has the specified number of elements
+     * within the specified range
+     * @param numElements number of elements that will be in multiset S
+     * @param max the max of the range of added elements
+     * @return generated multiset
+     */
+    public static List<Integer> genRandomMultiSet(int numElements, int max) {
+        List<Integer> multiset = new ArrayList<>();
+        Random rand = new Random();
+        for(int i = 0; i < numElements; i++) {
+            multiset.add(rand.nextInt(max) + 1);
+        }
+        return multiset;
     }
 }
