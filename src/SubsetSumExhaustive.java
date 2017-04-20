@@ -66,7 +66,7 @@ public class SubsetSumExhaustive {
         }
         //Add an element of feasibleMultiset to all subsets and
         //check if their sum matches the target sum
-        List<Integer> currSubset = new ArrayList<>();
+        List<Integer> currSubset;
         for(int i = 0; i < feasibleMultiset.size(); i++){
             for(int j = 0; j < feasibleMultiset.size(); j++){
                 //Checking that we're not adding to subset that already holds
