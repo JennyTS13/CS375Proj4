@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Finds if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
- * Greedy approach.
+ * Hill-Climbing approach.
  */
 public class SubsetSumHillClimb {
 
