@@ -38,7 +38,7 @@ public class SubsetSumExhaustive {
 //        return false;
 //    }
 
-    public static boolean subsetExists(List<Long> multiset, int sum) {
+    public static boolean subsetExists(List<Integer> multiset, int sum) {
         //empty set is a subset if sum = 0
         if (sum == 0){
             return true;
@@ -46,9 +46,9 @@ public class SubsetSumExhaustive {
 
         //Create a multiset and add all elements of the input multiset if
         //its element are less than or equal to the sum
-        List<Long> feasibleMultiset = new ArrayList<>();
+        List<Integer> feasibleMultiset = new ArrayList<>();
         for (int i = 0; i < multiset.size(); i++) {
-            long val = multiset.get(i);
+            int val = multiset.get(i);
             if (val < sum) {
                 feasibleMultiset.add(val);
             }
@@ -59,15 +59,14 @@ public class SubsetSumExhaustive {
         }
 
         //Create list of subsets of feasibleMultiset
-        List<List<Long>> subsets = new ArrayList<>();
+        List<List<Integer>> subsets = new ArrayList<>();
         for(int i = 0; i < feasibleMultiset.size(); i++){
             //add each individual element as a subset of feasibleMultiset
             subsets.add(Arrays.asList(feasibleMultiset.get(i)));
         }
-
         //Add an element of feasibleMultiset to all subsets and
         //check if their sum matches the target sum
-        List<Long> currSubset;
+        List<Integer> currSubset;
         for(int i = 0; i < feasibleMultiset.size(); i++){
             for(int j = 0; j < feasibleMultiset.size(); j++){
                 //Checking that we're not adding to subset that already holds
