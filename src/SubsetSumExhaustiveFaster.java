@@ -51,11 +51,11 @@ public class SubsetSumExhaustiveFaster {
      *
      * @return A list of all subsets
      */
-    public static Pair<Boolean, List<List<Long>>> getSubsets(List<Long> multiset, int sum) {
-        ArrayList<List<Long>> subsetsList = new ArrayList<>();
+    public static Pair<Boolean, List<Pair<Long, List<Long>>>> getSubsets(List<Long> multiset, int sum) {
+        List<Pair<Long, List<Long>>> subsetsList = new ArrayList<>();
         // base case
         if (multiset.size() == 0) {
-            subsetsList.add(new ArrayList<>());
+            subsetsList.add(new Pair<>(0L, new ArrayList<>()));
         }
         else {
             List<Long> remainingSet = new ArrayList<>();
@@ -65,23 +65,29 @@ public class SubsetSumExhaustiveFaster {
 
             // recursively removes first element and finds subsets
             long firstElement = remainingSet.remove(0);
-            Pair<Boolean, List<List<Long>>> result = getSubsets(remainingSet, sum);
-            if (result.getKey()){
+            Pair<Boolean, List<Pair<Long, List<Long>>>> result = getSubsets(remainingSet, sum);
+            if(result.getKey()){
                 return result;
             }
             subsetsList.addAll(result.getValue());
 
             // subsets adding the first element back in
-            Pair<Boolean, List<List<Long>>> subsets = getSubsets(remainingSet, sum);
-            for (List<Long> subset : subsets.getValue()) {
-                subset.add(0, firstElement);
-                if (SubsetUtil.getSum(subset) == sum){
-                    return new Pair<>(true, subsets.getValue());
+            Pair<Boolean, List<Pair<Long, List<Long>>>> subsets = getSubsets(remainingSet, sum);
+            List<Pair<Long, List<Long>>> opts = subsets.getValue();
+            for (int i = 0; i < opts.size(); i++) {
+                Pair<Long, List<Long>> originalPair = opts.get(i);
+                Long sumSubSet = originalPair.getKey() + firstElement;
+                originalPair.getValue().add(firstElement);
+                Pair<Long, List<Long>> pairIncludingFirst = new Pair<>(sumSubSet, originalPair.getValue());
+                opts.set(i, pairIncludingFirst );
+                if (sumSubSet == sum){
+                    return new Pair<>(true, subsetsList);
                 }
             }
 
-            subsetsList.addAll(subsets.getValue());
+            subsetsList.addAll(opts);
         }
+
         return new Pair<>(false, subsetsList);
     }
 
