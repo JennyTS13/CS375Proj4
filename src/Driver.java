@@ -218,14 +218,15 @@ public class Driver {
 
         int maxSum = 100_000;
         for (int i = 0; i < numElements.length; i++) {
+            initialize(numElements[i], max, maxSum);
+            // test exhaustive with 20, 50, 200 as params ~2 seconds
+            // testExhaustive();
+            //testExhaustiveFaster();
+            testGreedy();
+            testDynamic();
             for (int j = 0; j < repsOpts.length; j++) {
-                initialize(numElements[i], max, maxSum);
-                // test exhaustive with 20, 50, 200 as params ~2 seconds
-                // testExhaustive();
-                //testExhaustiveFaster();
-                testGreedy();
                 testHillClimb(repsOpts[j]);
-                testDynamic();
+                testRandom(repsOpts[j]);
                 testSimulatedAnnealing(repsOpts[j]);
             }
         }
