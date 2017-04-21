@@ -123,7 +123,7 @@ public class Driver {
         //do not use max size greater than int max size, you will lose data in
         //dynamic programing with casting long to int
 
-        SubsetSumDynamicProgramming dynamicProgramming = new SubsetSumDynamicProgramming();
+        SubsetSumDynamicProg dynamicProgramming = new SubsetSumDynamicProg();
         SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
         SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
         SubsetSumHillClimb hillClimb = new SubsetSumHillClimb();
