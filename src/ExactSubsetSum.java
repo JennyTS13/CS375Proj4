@@ -1,7 +1,14 @@
+/*
+ * File:    ExactSubsetSum.java
+ * Authors: Charlie Beck, Phoebe Hughes, Tiffany Lam, Jenny Lin
+ * Date:    April 21, 2017
+ * Project: 4
+ */
+
 import java.util.List;
 
 /**
- * Created by Phoebe Hughes on 4/20/2017.
+ * Interface for algorithms that solve the subset sum problem exactly
  */
 public interface ExactSubsetSum {
     public boolean subsetExists(List<Long> multiset, int sum);

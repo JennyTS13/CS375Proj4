@@ -15,7 +15,7 @@ import java.util.Random;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumSimulatedAnnealing implements  RepetitiveApproximateSubsetSum{
+public class SubsetSumSimulatedAnnealing implements RepApproxSubsetSum {
 
 
     /**

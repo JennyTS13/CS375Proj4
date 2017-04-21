@@ -34,6 +34,7 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
             if (item <= sum) {
                 newMultiset.add(item);
             }
+
         }
 
         // get all subsets of the feasible multiset

@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Hill-Climbing approach.
  */
-public class SubsetSumHillClimb implements RepetitiveApproximateSubsetSum{
+public class SubsetSumHillClimb implements RepApproxSubsetSum{
 
     /**
      * Returns the residue, the absolute value of the difference between

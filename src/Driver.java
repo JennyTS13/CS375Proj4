@@ -5,8 +5,6 @@
  * Project: 4
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -48,7 +46,7 @@ public class Driver {
      */
     private static void testExact(String name, ExactSubsetSum exactSubsetSum) {
         //run the algo 5 times for warm up
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 5; i++) {
             exactSubsetSum.subsetExists(S, k);
         }
 
@@ -70,7 +68,7 @@ public class Driver {
      * Tests a SubsetSum - Greedy approach
      */
     private static void testGreedy() {
-        //run greedy algo 5 times for warm up
+        // run greedy algo 5 times for warm up
         for(int i = 0; i < 5; i++){
             SubsetSumGreedy.subsetResidue(S, k);
         }
@@ -94,8 +92,8 @@ public class Driver {
      *
      * @param reps number to times to compare with neighbors
      */
-    private static void testRepetitiveApproximate(String name, RepetitiveApproximateSubsetSum algo, int reps) {
-        //run the algo 5 times for warm up
+    private static void testRepApprox(String name, RepApproxSubsetSum algo, int reps) {
+        // run the algo 5 times for warm up
         for(int i = 0; i < 5; i++){
             algo.subsetResidue(S, k, reps);
         }
@@ -134,15 +132,16 @@ public class Driver {
 
         for (int i = 0; i < numElements.length; i++) {
             initialize(numElements[i], max, maxSum);
-            // test exhaustive with 20, 50, 200 as params ~2 seconds
-            //testExact("Exhaustive", exhaustive);
-            //testExact("Exhaustive Fast", exhaustiveFaster);
+            // won't work past 10 elements
+            testExact("Exhaustive", exhaustive);
+            // won't work past 10,000 elements
+            testExact("Exhaustive Fast", exhaustiveFaster);
             testExact("Dynamic Programming", dynamicProgramming);
             testGreedy();
             for (int j = 0; j < repsOpts.length; j++) {
-                testRepetitiveApproximate("Random", random, repsOpts[j]);
-                testRepetitiveApproximate("Hill Climb", hillClimb, repsOpts[j]);
-                testRepetitiveApproximate("Simulated Annealing", annealing, repsOpts[j]);
+                testRepApprox("Random", random, repsOpts[j]);
+                testRepApprox("Hill Climb", hillClimb, repsOpts[j]);
+                testRepApprox("Simulated Annealing", annealing, repsOpts[j]);
             }
         }
     }

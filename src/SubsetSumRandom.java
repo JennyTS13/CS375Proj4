@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Random approach.
  */
-public class SubsetSumRandom implements RepetitiveApproximateSubsetSum{
+public class SubsetSumRandom implements RepApproxSubsetSum{
 
     /**
      * Returns the residue, the absolute value of the difference between
