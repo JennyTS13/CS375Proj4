@@ -58,8 +58,8 @@ public class SubsetSumGreedy {
      * @param args
      */
     public static void main(String[] args){
-        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 2L, 3L));
-        long residue = SubsetSumGreedy.subsetResidue(intList, 2);
+        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 8L, 3L));
+        long residue = SubsetSumGreedy.subsetResidue(intList, 7);
         System.out.println(residue);
     }
 

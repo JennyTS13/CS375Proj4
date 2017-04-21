@@ -44,65 +44,22 @@ public class Driver {
     }
 
     /**
-     * Tests a SubsetSum - Exhaustive approach
+     * Tests a SubsetSum - for Exact algorithms
      */
-    private static void testExhaustive() {
-        //run exhaustive algo 5 times for warm up
+    private static void testExact(String name, ExactSubsetSum exactSubsetSum) {
+        //run the algo 5 times for warm up
         for(int i = 0; i < 5; i++){
-            SubsetSumExhaustive.subsetExists(S, k);
+            exactSubsetSum.subsetExists(S, k);
         }
 
         // finds if there exists a subset of the set S
         // where the sum of its elements is equal to a specified sum k.
         Timer.start();
-        boolean result = SubsetSumExhaustive.subsetExists(S, k);
+        boolean result = exactSubsetSum.subsetExists(S, k);
         Timer.stop();
 
         // output the results
-        System.out.println("--------Exhaustive----------");
-        System.out.println("Subset found: " + result);
-
-        // output the time needed to find the product
-        System.out.println("Time: " + Timer.getRuntime() + "ms");
-    }
-
-    private static void testExhaustiveFaster() {
-        //run exhaustive algo 5 times for warm up
-        for(int i = 0; i < 5; i++){
-            SubsetSumExhaustiveFaster.subsetExists(S, k);
-        }
-
-        // finds if there exists a subset of the set S
-        // where the sum of its elements is equal to a specified sum k.
-        Timer.start();
-        boolean result = SubsetSumExhaustiveFaster.subsetExists(S, k);
-        Timer.stop();
-
-        // output the results
-        System.out.println("--------Exhaustive Faster----------");
-        System.out.println("Subset found: " + result);
-
-        // output the time needed to find the product
-        System.out.println("Time: " + Timer.getRuntime() + "ms");
-    }
-
-    /**
-     * Tests a SubsetSum - Dynamic Programming
-     */
-    private static void testDynamic() {
-        //run dynamic programming algo 5 times for warm up
-        for(int i = 0; i < 5; i++){
-            SubsetSumDynamicProgramming.subsetExists(S, k);
-        }
-
-        // finds if there exists a subset of the set S
-        // where the sum of its elements is equal to a specified sum k.
-        Timer.start();
-        boolean result = SubsetSumDynamicProgramming.subsetExists(S, k);
-        Timer.stop();
-
-        // output the results
-        System.out.println("--------Dynamic Programming----------");
+        System.out.println("--------" + name+ "----------");
         System.out.println("Subset found: " + result);
 
         // output the time needed to find the product
@@ -133,100 +90,62 @@ public class Driver {
     }
 
     /**
-     * Tests a SubsetSum - Hill Climb approach
+     * Tests a SubsetSum - that uses a repetitive approximate approach
      *
      * @param reps number to times to compare with neighbors
      */
-    private static void testHillClimb(int reps) {
-        //run hill climb algo 5 times for warm up
+    private static void testRepetitiveApproximate(String name, RepetitiveApproximateSubsetSum algo, int reps) {
+        //run the algo 5 times for warm up
         for(int i = 0; i < 5; i++){
-            SubsetSumHillClimb.subsetResidue(S, k, reps);
+            algo.subsetResidue(S, k, reps);
         }
 
         // finds if there exists a subset of the set S
         // where the sum of its elements is equal to a specified sum k.
         Timer.start();
-        long totalResidue = SubsetSumHillClimb.subsetResidue(S, k, reps);
+        long totalResidue = algo.subsetResidue(S, k, reps);
         Timer.stop();
 
 
         // output the results
-        System.out.println("--------Hill Climb----------");
+        System.out.println("--------" + name +"----------");
         System.out.println("Residue: " + totalResidue);
 
         // output the time needed to find the product
         System.out.println("Time: " + Timer.getRuntime() + "ms");
     }
 
-    /**
-     * Tests a SubsetSum - Random approach
-     *
-     * @param reps number to times to compare with neighbors
-     */
-    private static void testRandom(int reps) {
-        //run random algo 5 times for warm up
-        for(int i = 0; i < 5; i++){
-            SubsetSumRandom.subsetResidue(S, k, reps);
-        }
-
-        // finds if there exists a subset of the set S
-        // where the sum of its elements is equal to a specified sum k.
-        Timer.start();
-        long totalResidue = SubsetSumRandom.subsetResidue(S, k, reps);
-        Timer.stop();
-
-        // output the results
-        System.out.println("--------Random----------");
-        System.out.println("Residue: " + totalResidue);
-
-        // output the time needed to find the product
-        System.out.println("Time: " + Timer.getRuntime() + "ms");
-    }
-
-    /**
-     * Tests a SubsetSum - Simulated Annealing approach
-     *
-     * @param reps number to times to compare with neighbors
-     */
-    private static void testSimulatedAnnealing(int reps) {
-        //run simulated annealing algo 5 times for warm up
-        for(int i = 0; i < 5; i++){
-            SubsetSumSimulatedAnnealing.subsetResidue(S, k, reps);
-        }
-
-        // finds if there exists a subset of the set S
-        // where the sum of its elements is equal to a specified sum k.
-        Timer.start();
-        long totalResidue = SubsetSumSimulatedAnnealing.subsetResidue(S, k, reps);
-        Timer.stop();
-
-        // output the results
-        System.out.println("--------Simulated Annealing----------");
-        System.out.println("Residue: " + totalResidue);
-
-        // output the time needed to find the product
-        System.out.println("Time: " + Timer.getRuntime() + "ms");
-    }
 
     public static void main(String[] args){
         int[] numElements = {10, 100, 1_000, 10_000};
         int[] repsOpts = {100, 1_000, 5_000, 10_000, 50_000, 100_000};
 
+        int maxSum = 100_000;
         int max = 10_000;
         //do not use max size greater than int max size, you will lose data in
         //dynamic programing with casting long to int
 
-        int maxSum = 100_000;
+        SubsetSumDynamicProgramming dynamicProgramming = new SubsetSumDynamicProgramming();
+        SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
+        SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
+        SubsetSumHillClimb hillClimb = new SubsetSumHillClimb();
+        SubsetSumSimulatedAnnealing annealing = new SubsetSumSimulatedAnnealing();
+        SubsetSumRandom random = new SubsetSumRandom();
+
         for (int i = 0; i < numElements.length; i++) {
             for (int j = 0; j < repsOpts.length; j++) {
                 initialize(numElements[i], max, maxSum);
                 // test exhaustive with 20, 50, 200 as params ~2 seconds
-                // testExhaustive();
-                //testExhaustiveFaster();
-                testGreedy();
-                testHillClimb(repsOpts[j]);
-                testDynamic();
-                testSimulatedAnnealing(repsOpts[j]);
+                if(j == 0) { // there are not different rep vals => run only once
+                    //testExact("Exhaustive", exhaustive);
+                    //testExact("Exhaustive Fast", exhaustiveFaster);
+                    testExact("Dynamic Programming", dynamicProgramming);
+
+                    testGreedy();
+                }
+                testRepetitiveApproximate("Random", random, repsOpts[j]);
+                testRepetitiveApproximate("Hill Climb", hillClimb, repsOpts[j]);
+                testRepetitiveApproximate("Simulated Annealing", annealing, repsOpts[j]);
             }
         }
     }

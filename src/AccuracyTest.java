@@ -5,6 +5,8 @@
  * Project: 4
  */
 
+import javafx.util.Pair;
+
 import java.util.List;
 
 /**
@@ -26,18 +28,28 @@ public class AccuracyTest {
         return sum;
     }
 
+
     /**
-     * Finds the the sum of each row in the array of outputs
-     * @param outputs the array
-     * @return the sum of each row
+     * Calculates the averages over all runs with a given algorithm and repetition number.
+     * @param output the residues [numSets][algo#][repsOpt]
+     * @return the averages [algo#][repsOpt]
      */
-    private static long[][] getAverage(long[][][] outputs){
-        long[][] average = new long[outputs.length][outputs[0].length];
-        for (int i = 0; i< outputs.length; i++){
-            for (int j = 0; j < outputs[0].length; j++){
-                average[i][j] = sum(outputs[i][j])/outputs[0][0].length;
+    private static double[][] getAverageOverSets(double[][][] output){
+        double[][] average = new double[3][output[0][0].length];
+        //[algo#][repsOpt]
+
+        for (int algo = 0; algo <3; algo++ ){
+            for (int rep = 0; rep < output[0][0].length; rep++){
+                //calculates the average over all runs with a given algo and rep num
+                double sum = 0;
+                for (int set = 0; set < output[0].length; set++){
+                    sum += output[set][algo][rep];
+                }
+
+                average[algo][rep] = sum/average[0].length;
             }
         }
+
 
         return average;
     }
@@ -51,24 +63,58 @@ public class AccuracyTest {
      * @param k the target sum
      * @param numSets the number of times to create a set and calculate the residues
      * @param repsOpts the number of reps the algos
-     * @return the residues
+     * @param repsPerSet the number of times the algo is run on one multiset
+     * @return the residues [numSets][algo#][repsOpt]
      */
-    private static long[][][] getResults(int size, long maxSize, long k,
-                                         int numSets, int[] repsOpts) {
-        long[][][] output = new long[repsOpts.length][4][numSets];
-        for (int j = 0; j < repsOpts.length; j++) {
-            int numReps = repsOpts[j];
-            for (int i = 0; i < numSets; i++) {
-                List<Long> multiSet = SubsetUtil.genRandomMultiSet(size, maxSize);
-                output[j][0][i] = SubsetSumGreedy.subsetResidue(multiSet, k);
-                output[j][1][i] = SubsetSumHillClimb.subsetResidue(multiSet, k, numReps);
-                output[j][2][i] = SubsetSumRandom.subsetResidue(multiSet, k, numReps);
-                output[j][3][i] =
-                        SubsetSumSimulatedAnnealing.subsetResidue(multiSet, k, numReps);
+    private static Pair<long[], double[][][]> getResults(int size, long maxSize, long k,
+                                                       int numSets, int[] repsOpts, int repsPerSet) {
+
+       double[][][] outputRepetitive = new double[numSets][4][repsOpts.length];
+       long[] outputGreedy = new long[numSets];
+        for (int set = 0; set < numSets; set ++){
+            List<Long> multiSet = SubsetUtil.genRandomMultiSet(size, maxSize);
+
+            //finds the (average)residues
+            outputGreedy[set] = SubsetSumGreedy.subsetResidue(multiSet, k);
+            outputRepetitive[set] = outputsRepetitive(k, repsOpts, repsPerSet, multiSet);
+        }
+
+        return new Pair<>(outputGreedy, outputRepetitive);
+    }
+
+    /**
+     * Finds the average residue when running hill climb, random, and simulated annealing
+     * algorithms on a given multiset
+     * @param k the target sum
+     * @param repsOpts the number of reps for the algorithm
+     * @param repsPerSet the number of times to run the algorithm
+     * @param multiSet the multiset to run it on
+     * @return the residues [algo#][repOpt]
+     */
+    private static double[][] outputsRepetitive(long k, int[] repsOpts, int repsPerSet, List<Long> multiSet) {
+        double[][] outputs = new double[3][repsOpts.length];
+        RepetitiveApproximateSubsetSum[] algos = {new SubsetSumHillClimb(),
+                new SubsetSumRandom(), new SubsetSumSimulatedAnnealing()};
+
+        //repetitive aprox algos
+        for (int algo = 0; algo < 3; algo++) {
+            for (int rep = 0; rep < repsOpts.length; rep++) {
+                long[] runs = new long[repsPerSet];
+
+                //runs the algo on the multiset repPerSet num times
+                for (int m = 0; m < repsPerSet; m++) {
+                    runs[m] = algos[algo].subsetResidue(multiSet, k, repsOpts[rep]);
+                }
+
+                //takes the average of the residues
+                double average = sum(runs)/ (double)repsPerSet;
+                outputs[algo][rep] = average;
             }
         }
-        return output;
+
+        return  outputs;
     }
+
 
     /**
      * Finds the accuracy of the four different algorithms for finding the
@@ -80,32 +126,32 @@ public class AccuracyTest {
         long maxSize = (long)Math.pow(10, 12);
         long k = 25* maxSize;
         int numSets = 50;
+        //testing values
+//        int size = 10;
+//        long maxSize = 10;
+//        long k = 5;
+//        int numSets = 3;
+
+        int numRums = 20;
+        //the number of times an algo is run on a multiset
 
         int[] repsOpts = {100, 1_000, 5_000, 10_000, 50_000, 100_000};
-        String[] algos = {"Greedy:     ", "Hill Climb: ", "Random:     ", "Annealing:  " };
+        String[] algos = {"Hill Climb: ", "Random: ", "Annealing: " };
 
-        long[][][] output = getResults(size, maxSize, k, numSets, repsOpts);
-        //[repOpt][algo#][numSet]
 
-        long[][] averages = getAverage(output);
+        Pair<long[], double[][][]> output = getResults(size, maxSize, k, numSets, repsOpts, numRums);
+        //key: greedy outputs
+        //val: repetitive outputs [numSets][algo#][repsOpt]
 
-        //print the outputs
-        /*
-        for (int i =0; i < repsOpts.length; i++){
-            System.out.println("\n\nNumber of Reps: " + repsOpts[i]);
-            for (int j = 0; j< 4; j ++){
-                System.out.println("\n" + algos[j]);
-                for (int l = 0; l< numSets; l++){
-                    System.out.print(output[i][j][l] + " ");
-                }
-            }
-        }*/
+        double greedyOut = sum(output.getKey())/ (double)numSets;
+        double[][] repOuts = getAverageOverSets(output.getValue());
 
-        //print the averages
-        for (int i =0; i < repsOpts.length; i++){
-            System.out.println("\n\nNumber of Reps: " + repsOpts[i]);
-            for (int j = 0; j< 4; j ++){
-                System.out.println(algos[j] + averages[i][j]);
+        System.out.println("Greedy: " + greedyOut);
+
+        for (int algo = 0; algo < 3; algo++){
+            System.out.println("\n" + algos[algo]);
+            for (int rep =0; rep < repsOpts.length; rep++){
+                System.out.println("Number of Reps: " + repsOpts[rep] + " Result: " + repOuts[algo][rep]);
             }
         }
     }

@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Random approach.
  */
-public class SubsetSumRandom {
+public class SubsetSumRandom implements RepetitiveApproximateSubsetSum{
 
     /**
      * Returns the residue, the absolute value of the difference between
@@ -25,7 +25,8 @@ public class SubsetSumRandom {
      *
      * @return lowestRes - the residue
      */
-    public static long subsetResidue(List<Long> multiset, long sum, int numReps){
+    @Override
+    public long subsetResidue(List<Long> multiset, long sum, int numReps){
         List<Long> current;
         long curRes = sum;
         long lowestRes = sum;
@@ -47,7 +48,8 @@ public class SubsetSumRandom {
      */
     public static void main(String[] args){
         List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 2L, 3L));
-        long residue = SubsetSumRandom.subsetResidue(intList, 7, 3);
+        SubsetSumRandom subsetSumRandom = new SubsetSumRandom();
+        long residue = subsetSumRandom.subsetResidue(intList, 7, 3);
         System.out.println(residue);
     }
 }

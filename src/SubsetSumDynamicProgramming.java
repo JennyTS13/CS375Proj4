@@ -12,7 +12,7 @@ import java.util.List;
  * Determines if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
  */
-public class SubsetSumDynamicProgramming {
+public class SubsetSumDynamicProgramming implements ExactSubsetSum{
 
 
     /**
@@ -24,7 +24,8 @@ public class SubsetSumDynamicProgramming {
      *
      * @return boolean indicating if such a subset exists
      */
-    public static boolean subsetExists(List<Long> multiset, int sum){
+    @Override
+    public boolean subsetExists(List<Long> multiset, int sum){
         Long multiSetSize = SubsetUtil.getSum(multiset);
 
         //if creating matrix n x p
@@ -69,14 +70,15 @@ public class SubsetSumDynamicProgramming {
      */
     public static void main(String[] args){
         List<Long> S = Arrays.asList(2L, 3L, 9L, 1L);
-        System.out.println("Result 4: " + SubsetSumDynamicProgramming.subsetExists(S, 4));
+        SubsetSumDynamicProgramming dynamicProgramming = new SubsetSumDynamicProgramming();
+        System.out.println("Result 4: " + dynamicProgramming.subsetExists(S, 4));
 
-        System.out.println("Result 11: " + SubsetSumDynamicProgramming.subsetExists(S, 11));
+        System.out.println("Result 11: " + dynamicProgramming.subsetExists(S, 11));
 
-        System.out.println("Result 1: " + SubsetSumDynamicProgramming.subsetExists(S, 1));
+        System.out.println("Result 1: " + dynamicProgramming.subsetExists(S, 1));
 
-        System.out.println("Result 7: " + SubsetSumDynamicProgramming.subsetExists(S, 7));
+        System.out.println("Result 7: " + dynamicProgramming.subsetExists(S, 7));
 
-        System.out.println("Result 8: " + SubsetSumDynamicProgramming.subsetExists(S, 8));
+        System.out.println("Result 8: " + dynamicProgramming.subsetExists(S, 8));
     }
 }

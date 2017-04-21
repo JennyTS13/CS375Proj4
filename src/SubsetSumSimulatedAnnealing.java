@@ -15,7 +15,7 @@ import java.util.Random;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumSimulatedAnnealing {
+public class SubsetSumSimulatedAnnealing implements  RepetitiveApproximateSubsetSum{
 
 
     /**
@@ -27,7 +27,8 @@ public class SubsetSumSimulatedAnnealing {
      *
      * @return double - the residue
      */
-    public static long subsetResidue(List<Long> multiset, long sum, int numRepetitions){
+    @Override
+    public long subsetResidue(List<Long> multiset, long sum, int numRepetitions){
         Random r = new Random();
         List<Long> subset = SubsetUtil.genRandomSubset(multiset);
         long smallestResidue = SubsetUtil.getResidue(subset, sum);
@@ -71,7 +72,8 @@ public class SubsetSumSimulatedAnnealing {
      */
     public static void main(String[] args){
         List<Long> S = Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L);
-        long residue = SubsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
+        SubsetSumSimulatedAnnealing subsetSumSimulatedAnnealing = new SubsetSumSimulatedAnnealing();
+        long residue = subsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
         System.out.println("Residue: " + residue);
     }
 

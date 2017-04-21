@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Hill-Climbing approach.
  */
-public class SubsetSumHillClimb {
+public class SubsetSumHillClimb implements RepetitiveApproximateSubsetSum{
 
     /**
      * Returns the residue, the absolute value of the difference between
@@ -26,7 +26,8 @@ public class SubsetSumHillClimb {
      *
      * @return double - the residue
      */
-    public static long subsetResidue(List<Long> multiset, long sum, int reps){
+    @Override
+    public long subsetResidue(List<Long> multiset, long sum, int reps){
         List<Long> currSubset = SubsetUtil.genRandomSubset(multiset);
         long currResidue = SubsetUtil.getResidue(currSubset, sum);
         List<Long> neighbor;
@@ -52,7 +53,8 @@ public class SubsetSumHillClimb {
      */
     public static void main(String[] args){
         List<Long> intList = new ArrayList<>(Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L, 8L, 2L, 45L, 4L));
-        long residue = subsetResidue(intList, 15, 20);
+        SubsetSumHillClimb subsetSumHillClimb = new SubsetSumHillClimb();
+        long residue = subsetSumHillClimb.subsetResidue(intList, 15, 20);
         System.out.println(residue);
     }
 }
