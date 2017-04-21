@@ -121,13 +121,13 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum {
      */
     public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
-        SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
+        SubsetSumExhaustiveFaster subsetSumExhaustiveFaster = new SubsetSumExhaustiveFaster();
         int k = 4;
-        boolean result = subsetSumExhaustive.subsetExists(S, k);
+        boolean result = subsetSumExhaustiveFaster.subsetExists(S, k);
         System.out.println(result);
 
         k = 8;
-        result = subsetSumExhaustive.subsetExists(S, k);
+        result = subsetSumExhaustiveFaster.subsetExists(S, k);
         System.out.println(result);
     }
 }

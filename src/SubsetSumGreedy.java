@@ -58,7 +58,6 @@ public class SubsetSumGreedy {
      */
     public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
-        SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
         int k = 4;
         long residue = SubsetSumGreedy.subsetResidue(S, k);
         System.out.println(residue);
