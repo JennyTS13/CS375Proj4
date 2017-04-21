@@ -25,17 +25,18 @@ public class SubsetSumExhaustive {
      * @return boolean indicating if such a subset exists
      */
     public static boolean subsetExists(List<Long> multiset, int sum) {
-        List<Long> feasibleMultiset = new ArrayList<>(multiset);
+        List<Long> newMultiset = new ArrayList<>();
 
         // remove values greater than the sum
-        for (int i = 0; i < feasibleMultiset.size(); i++) {
-            if (feasibleMultiset.get(i) > sum) {
-                feasibleMultiset.remove(i);
+        for (int i = 0; i < multiset.size(); i++) {
+            Long item = multiset.get(i);
+            if (item <= sum) {
+                newMultiset.add(item);
             }
         }
 
         // get all subsets of the feasible multiset
-        List<List<Long>> subsets = getSubsets(feasibleMultiset, sum);
+        List<List<Long>> subsets = getSubsets(newMultiset, sum);
         // for each possible subset, check to see if its sum = target sum
         for (List<Long> subset : subsets) {
             if (SubsetUtil.getSum(subset) == sum) {
