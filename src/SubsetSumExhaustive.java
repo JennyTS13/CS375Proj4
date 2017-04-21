@@ -37,7 +37,7 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
         }
 
         // get all subsets of the feasible multiset
-        List<List<Long>> subsets = getSubsets(newMultiset, sum);
+        List<List<Long>> subsets = getSubsets(newMultiset);
         // for each possible subset, check to see if its sum = target sum
         for (List<Long> subset : subsets) {
             if (SubsetUtil.getSum(subset) == sum) {
@@ -54,7 +54,7 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
      *
      * @return A list of all subsets
      */
-    public static List<List<Long>> getSubsets(List<Long> multiset, int sum) {
+    public static List<List<Long>> getSubsets(List<Long> multiset) {
         ArrayList<List<Long>> subsetsList = new ArrayList<>();
         // base case
         if (multiset.size() == 0) {
@@ -66,11 +66,11 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
 
             // recursively removes first element and finds subsets
             long firstElement = remainingSet.remove(0);
-            List<List<Long>> subsets = getSubsets(remainingSet, sum);
+            List<List<Long>> subsets = getSubsets(remainingSet);
             subsetsList.addAll(subsets);
 
             // subsets adding the first element back in
-            subsets = getSubsets(remainingSet, sum);
+            subsets = getSubsets(remainingSet);
             for (List<Long> subset : subsets) {
                 subset.add(0, firstElement);
             }
