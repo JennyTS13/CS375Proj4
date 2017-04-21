@@ -93,7 +93,7 @@ public class AccuracyTest {
      */
     private static double[][] outputsRepetitive(long k, int[] repsOpts, int repsPerSet, List<Long> multiSet) {
         double[][] outputs = new double[3][repsOpts.length];
-        RepetitiveApproximateSubsetSum[] algos = {new SubsetSumHillClimb(),
+        RepApproxSubsetSum[] algos = {new SubsetSumHillClimb(),
                 new SubsetSumRandom(), new SubsetSumSimulatedAnnealing()};
 
         //repetitive aprox algos

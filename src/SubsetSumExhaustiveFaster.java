@@ -32,13 +32,21 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
             Long item = multiset.get(i);
-            if (item <= sum) {
+            if (item < sum) {
                 newMultiset.add(item);
+            }
+            else if (item == sum){
+                return true;
             }
         }
 
-        if (sum == 0 || SubsetUtil.getSum(newMultiset) == sum){
+
+        long multisetSum = SubsetUtil.getSum(newMultiset);
+        if (sum == 0 || multisetSum == sum){
             return true;
+        }
+        else if (multisetSum < sum){
+            return false;
         }
 
         return getSubsets(newMultiset, sum).getKey();
@@ -124,7 +132,7 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
         SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
         SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
 
-        int k = 54;
+        int k = 24;
         boolean result = exhaustiveFaster.subsetExists(S, k);
         System.out.println(result);
 
