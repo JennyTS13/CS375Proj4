@@ -37,6 +37,10 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
             }
         }
 
+        if (sum == 0 || SubsetUtil.getSum(newMultiset) == sum){
+            return true;
+        }
+
         return getSubsets(newMultiset, sum).getKey();
     }
 
