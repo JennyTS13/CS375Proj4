@@ -71,10 +71,15 @@ public class SubsetSumSimAnnealing implements RepApproxSubsetSum {
      * @param args
      */
     public static void main(String[] args) {
-        List<Long> S = Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L);
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumSimAnnealing subsetSumSimulatedAnnealing = new SubsetSumSimAnnealing();
-        long residue = subsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
-        System.out.println("Residue: " + residue);
+        int k = 4;
+        long residue = subsetSumSimulatedAnnealing.subsetResidue(S, k, 3);
+        System.out.println(residue);
+
+        k = 8;
+        residue = subsetSumSimulatedAnnealing.subsetResidue(S, k, 3);
+        System.out.println(residue);
     }
 
 }

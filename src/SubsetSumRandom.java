@@ -47,9 +47,14 @@ public class SubsetSumRandom implements RepApproxSubsetSum {
      * @param args
      */
     public static void main(String[] args) {
-        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 2L, 3L));
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumRandom subsetSumRandom = new SubsetSumRandom();
-        long residue = subsetSumRandom.subsetResidue(intList, 7, 3);
+        int k = 4;
+        long residue = subsetSumRandom.subsetResidue(S, k, 3);
+        System.out.println(residue);
+
+        k = 8;
+        residue = subsetSumRandom.subsetResidue(S, k, 3);
         System.out.println(residue);
     }
 }

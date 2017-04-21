@@ -51,9 +51,14 @@ public class SubsetSumHillClimb implements RepApproxSubsetSum {
      * @param args
      */
     public static void main(String[] args) {
-        List<Long> intList = new ArrayList<>(Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L, 8L, 2L, 45L, 4L));
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumHillClimb subsetSumHillClimb = new SubsetSumHillClimb();
-        long residue = subsetSumHillClimb.subsetResidue(intList, 15, 20);
+        int k = 4;
+        long residue = subsetSumHillClimb.subsetResidue(S, k, 3);
+        System.out.println(residue);
+
+        k = 8;
+        residue = subsetSumHillClimb.subsetResidue(S, k, 3);
         System.out.println(residue);
     }
 }

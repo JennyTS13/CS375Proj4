@@ -31,11 +31,11 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum {
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
-            Long item = multiset.get(i);
-            if (item < sum) {
-                feasibleMultiset.add(item);
+            Long val = multiset.get(i);
+            if (val < sum) {
+                feasibleMultiset.add(val);
             }
-            else if (item == sum) {
+            else if (val == sum) {
                 return true;
             }
         }
@@ -120,44 +120,14 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum {
      * @param args
      */
     public static void main(String[] args) {
-        List<Long> S = Arrays.asList(1L, 8L, 3L, 9L, 10L, 32L, 42L, 5L,
-                12L, 14L, 24L, 5L, 7L, 6L, 78L);
-        List<Long> S2 = new ArrayList<>();
-        for (int i = 0; i < 20; i++){
-            S2.add(8L);
-        }
-
-        SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
-        SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
-
-        int k = 24;
-        boolean result = exhaustiveFaster.subsetExists(S, k);
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
+        SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
+        int k = 4;
+        boolean result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
 
-        k = 84;
-        Timer.start();
-        result = exhaustiveFaster.subsetExists(S, k);
-        Timer.stop();
-        System.out.println("\nFast Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        Timer.start();
-        result = exhaustive.subsetExists(S, k);
-        Timer.stop();
-        System.out.println("Slow Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        k = 55;
-        Timer.start();
-        result = exhaustiveFaster.subsetExists(S2, k);
-        Timer.stop();
-        System.out.println("\nFast Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        Timer.start();
-        result = exhaustive.subsetExists(S2, k);
-        Timer.stop();
-        System.out.println("Slow Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
+        k = 8;
+        result = subsetSumExhaustive.subsetExists(S, k);
+        System.out.println(result);
     }
 }

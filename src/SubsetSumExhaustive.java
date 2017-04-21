@@ -30,11 +30,11 @@ public class SubsetSumExhaustive implements ExactSubsetSum {
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
-            Long item = multiset.get(i);
-            if (item < sum) {
-                feasibleMultiset.add(item);
+            Long val = multiset.get(i);
+            if (val < sum) {
+                feasibleMultiset.add(val);
             }
-            else if (item == sum){
+            else if (val == sum){
                 return true;
             }
         }
@@ -90,11 +90,11 @@ public class SubsetSumExhaustive implements ExactSubsetSum {
     public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
-        int k = 8;
+        int k = 4;
         boolean result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
 
-        k = 11;
+        k = 8;
         result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
     }
