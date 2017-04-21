@@ -133,16 +133,13 @@ public class Driver {
         SubsetSumRandom random = new SubsetSumRandom();
 
         for (int i = 0; i < numElements.length; i++) {
+            initialize(numElements[i], max, maxSum);
+            // test exhaustive with 20, 50, 200 as params ~2 seconds
+            //testExact("Exhaustive", exhaustive);
+            //testExact("Exhaustive Fast", exhaustiveFaster);
+            testExact("Dynamic Programming", dynamicProgramming);
+            testGreedy();
             for (int j = 0; j < repsOpts.length; j++) {
-                initialize(numElements[i], max, maxSum);
-                // test exhaustive with 20, 50, 200 as params ~2 seconds
-                if(j == 0) { // there are not different rep vals => run only once
-                    //testExact("Exhaustive", exhaustive);
-                    //testExact("Exhaustive Fast", exhaustiveFaster);
-                    testExact("Dynamic Programming", dynamicProgramming);
-
-                    testGreedy();
-                }
                 testRepetitiveApproximate("Random", random, repsOpts[j]);
                 testRepetitiveApproximate("Hill Climb", hillClimb, repsOpts[j]);
                 testRepetitiveApproximate("Simulated Annealing", annealing, repsOpts[j]);
