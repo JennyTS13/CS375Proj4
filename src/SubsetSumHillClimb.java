@@ -47,7 +47,7 @@ public class SubsetSumHillClimb implements RepApproxSubsetSum{
     }
 
     /**
-     * Used to test Subset Sum (Greedy approach)
+     * Used to test Subset Sum (HillClimb approach)
      *
      * @param args
      */
