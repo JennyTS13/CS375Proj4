@@ -14,7 +14,7 @@ import java.util.List;
  * Finds if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
  */
-public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
+public class SubsetSumExhaustiveFaster implements ExactSubsetSum {
 
     /**
      * Checks all possible subsets of S until it finds a subset (if any)
@@ -27,29 +27,27 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
      */
     @Override
     public boolean subsetExists(List<Long> multiset, int sum) {
-        List<Long> newMultiset = new ArrayList<>();
+        List<Long> feasibleMultiset = new ArrayList<>();
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
             Long item = multiset.get(i);
             if (item < sum) {
-                newMultiset.add(item);
+                feasibleMultiset.add(item);
             }
-            else if (item == sum){
+            else if (item == sum) {
                 return true;
             }
         }
 
-
-        long multisetSum = SubsetUtil.getSum(newMultiset);
+        long multisetSum = SubsetUtil.getSum(feasibleMultiset);
         if (sum == 0 || multisetSum == sum){
             return true;
         }
-        else if (multisetSum < sum){
+        else if (multisetSum < sum) {
             return false;
         }
-
-        return getSubsets(newMultiset, sum).getKey();
+        return getSubsets(feasibleMultiset, sum).getKey();
     }
 
     /**

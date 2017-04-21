@@ -26,18 +26,21 @@ public class SubsetSumExhaustive implements ExactSubsetSum {
      */
     @Override
     public boolean subsetExists(List<Long> multiset, int sum) {
-        List<Long> newMultiset = new ArrayList<>();
+        List<Long> feasibleMultiset = new ArrayList<>();
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
             Long item = multiset.get(i);
-            if (item <= sum) {
-                newMultiset.add(item);
+            if (item < sum) {
+                feasibleMultiset.add(item);
+            }
+            else if (item == sum){
+                return true;
             }
         }
 
         // get all subsets of the feasible multiset
-        List<List<Long>> subsets = getSubsets(newMultiset);
+        List<List<Long>> subsets = getSubsets(feasibleMultiset);
         // for each possible subset, check to see if its sum = target sum
         for (List<Long> subset : subsets) {
             if (SubsetUtil.getSum(subset) == sum) {
