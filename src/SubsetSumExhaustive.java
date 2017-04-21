@@ -13,7 +13,7 @@ import java.util.List;
  * Finds if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
  */
-public class SubsetSumExhaustive implements ExactSubsetSum{
+public class SubsetSumExhaustive implements ExactSubsetSum {
 
     /**
      * Checks all possible subsets of S until it finds a subset (if any)
@@ -34,7 +34,6 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
             if (item <= sum) {
                 newMultiset.add(item);
             }
-
         }
 
         // get all subsets of the feasible multiset
@@ -75,7 +74,6 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
             for (List<Long> subset : subsets) {
                 subset.add(0, firstElement);
             }
-
             subsetsList.addAll(subsets);
         }
         return subsetsList;

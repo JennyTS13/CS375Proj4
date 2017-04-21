@@ -15,7 +15,7 @@ import java.util.Random;
  * the sum of its elements is equal to a specified sum k.
  * Greedy approach.
  */
-public class SubsetSumSimulatedAnnealing implements RepApproxSubsetSum {
+public class SubsetSumSimAnnealing implements RepApproxSubsetSum {
 
 
     /**
@@ -28,7 +28,7 @@ public class SubsetSumSimulatedAnnealing implements RepApproxSubsetSum {
      * @return double - the residue
      */
     @Override
-    public long subsetResidue(List<Long> multiset, long sum, int numRepetitions){
+    public long subsetResidue(List<Long> multiset, long sum, int numRepetitions) {
         Random r = new Random();
         List<Long> subset = SubsetUtil.genRandomSubset(multiset);
         long smallestResidue = SubsetUtil.getResidue(subset, sum);
@@ -39,25 +39,25 @@ public class SubsetSumSimulatedAnnealing implements RepApproxSubsetSum {
             List<Long> neighbor = SubsetUtil.genNeighbor(multiset, subset);
             neighborResidue = SubsetUtil.getResidue(neighbor, sum);
 
-            //if neighbor has a larger or equal residue then it becomes the
-            //subset with a probability of e^-T
-            if (neighborResidue >= residue){
-                //calculates T using the given formula
+            // if neighbor has a larger or equal residue then it becomes the
+            // subset with a probability of e^-T
+            if (neighborResidue >= residue) {
+                // calculates T using the given formula
                 double T = (neighborResidue - residue)/
                         (10000000000L  * Math.pow(0.8,(i/300)));
                 double eT = Math.pow(Math.E, -T);
-                if ( r.nextDouble() < eT){
+                if ( r.nextDouble() < eT) {
                     subset = neighbor;
                     residue = neighborResidue;
                 }
             }
-            else{ // neighborResidue < residue, then neighbor becomes subset
+            else { // neighborResidue < residue, then neighbor becomes subset
                 subset = neighbor;
                 residue = neighborResidue;
             }
 
-            //update residues
-            if (neighborResidue < smallestResidue){
+            // update residues
+            if (neighborResidue < smallestResidue) {
                 smallestResidue = neighborResidue;
             }
         }
@@ -70,9 +70,9 @@ public class SubsetSumSimulatedAnnealing implements RepApproxSubsetSum {
      * with a given sum
      * @param args
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 3L, 9L, 2L, 7L, 34L);
-        SubsetSumSimulatedAnnealing subsetSumSimulatedAnnealing = new SubsetSumSimulatedAnnealing();
+        SubsetSumSimAnnealing subsetSumSimulatedAnnealing = new SubsetSumSimAnnealing();
         long residue = subsetSumSimulatedAnnealing.subsetResidue(S, 11, 100);
         System.out.println("Residue: " + residue);
     }
