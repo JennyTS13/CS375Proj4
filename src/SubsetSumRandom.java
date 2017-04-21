@@ -14,7 +14,7 @@ import java.util.List;
  * the sum of its elements is equal to a specified sum k.
  * Random approach.
  */
-public class SubsetSumRandom implements RepApproxSubsetSum{
+public class SubsetSumRandom implements RepApproxSubsetSum {
 
     /**
      * Returns the residue, the absolute value of the difference between
@@ -26,15 +26,15 @@ public class SubsetSumRandom implements RepApproxSubsetSum{
      * @return lowestRes - the residue
      */
     @Override
-    public long subsetResidue(List<Long> multiset, long sum, int numReps){
+    public long subsetResidue(List<Long> multiset, long sum, int numReps) {
         List<Long> current;
         long curRes = sum;
         long lowestRes = sum;
 
-        for (int i = 0; i < numReps; i++){
+        for (int i = 0; i < numReps; i++) {
             current = SubsetUtil.genRandomSubset(multiset);
             curRes = SubsetUtil.getResidue(current, sum);
-            if (curRes <= lowestRes){
+            if (curRes <= lowestRes) {
                 lowestRes = curRes;
             }
         }
@@ -46,10 +46,15 @@ public class SubsetSumRandom implements RepApproxSubsetSum{
      *
      * @param args
      */
-    public static void main(String[] args){
-        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 2L, 3L));
+    public static void main(String[] args) {
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumRandom subsetSumRandom = new SubsetSumRandom();
-        long residue = subsetSumRandom.subsetResidue(intList, 7, 3);
+        int k = 4;
+        long residue = subsetSumRandom.subsetResidue(S, k, 3);
+        System.out.println(residue);
+
+        k = 8;
+        residue = subsetSumRandom.subsetResidue(S, k, 3);
         System.out.println(residue);
     }
 }

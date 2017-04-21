@@ -101,7 +101,7 @@ public class AccuracyTest {
                                                 List<Long> multiSet) {
         double[][] outputs = new double[3][repsOpts.length];
         RepApproxSubsetSum[] algos = {new SubsetSumHillClimb(),
-                new SubsetSumRandom(), new SubsetSumSimulatedAnnealing()};
+                new SubsetSumRandom(), new SubsetSumSimAnnealing()};
 
         //repetitive aprox algos
         for (int algo = 0; algo < 3; algo++) {

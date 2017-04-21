@@ -23,32 +23,31 @@ public class SubsetSumGreedy {
      *
      * @return double - the residue
      */
-    public static long subsetResidue(List<Long> multiset, long sum){
-        //Start with an empty subset of multiset S
+    public static long subsetResidue(List<Long> multiset, long sum) {
+        // Start with an empty subset of multiset S
         List<Long> intSubset = new ArrayList<>();
         int subsetSum = 0;
 
-        //Making copy of list to prevent side effects
+        // Making copy of list to prevent side effects
         List<Long> multiSetS = new ArrayList<>(multiset);
 
-        //Sort the multiset S from largest down to smallest.
+        // Sort the multiset S from largest down to smallest.
         Collections.sort(multiSetS, Collections.reverseOrder());
 
-        //Add next element in the sorted list to the subset if
-        //the integer will not give the subset too large a sum
-        //Otherwise, ignore that integer and move on to the next integer in the list
+        // Add next element in the sorted list to the subset if
+        // the integer will not give the subset too large a sum
+        // Otherwise, ignore that integer and move on to the next integer in the list
         for(long val : multiSetS){
             if(subsetSum + val <= sum){
                 intSubset.add(val);
                 subsetSum += val;
 
-                //return 0 as residue if current sum is equal to the target sum
+                // return 0 as residue if current sum is equal to the target sum
                 if(subsetSum == sum){
                     return 0;
                 }
             }
         }
-
         return sum - subsetSum;
     }
 
@@ -57,9 +56,15 @@ public class SubsetSumGreedy {
      *
      * @param args
      */
-    public static void main(String[] args){
-        List<Long> intList = new ArrayList<>(Arrays.asList(2L, 1L, 8L, 3L));
-        long residue = SubsetSumGreedy.subsetResidue(intList, 7);
+    public static void main(String[] args) {
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
+        SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
+        int k = 4;
+        long residue = SubsetSumGreedy.subsetResidue(S, k);
+        System.out.println(residue);
+
+        k = 8;
+        residue = SubsetSumGreedy.subsetResidue(S, k);
         System.out.println(residue);
     }
 

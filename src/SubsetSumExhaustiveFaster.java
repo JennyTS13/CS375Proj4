@@ -14,7 +14,7 @@ import java.util.List;
  * Finds if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
  */
-public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
+public class SubsetSumExhaustiveFaster implements ExactSubsetSum {
 
     /**
      * Checks all possible subsets of S until it finds a subset (if any)
@@ -27,29 +27,27 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
      */
     @Override
     public boolean subsetExists(List<Long> multiset, int sum) {
-        List<Long> newMultiset = new ArrayList<>();
+        List<Long> feasibleMultiset = new ArrayList<>();
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
-            Long item = multiset.get(i);
-            if (item < sum) {
-                newMultiset.add(item);
+            Long val = multiset.get(i);
+            if (val < sum) {
+                feasibleMultiset.add(val);
             }
-            else if (item == sum){
+            else if (val == sum) {
                 return true;
             }
         }
 
-
-        long multisetSum = SubsetUtil.getSum(newMultiset);
+        long multisetSum = SubsetUtil.getSum(feasibleMultiset);
         if (sum == 0 || multisetSum == sum){
             return true;
         }
-        else if (multisetSum < sum){
+        else if (multisetSum < sum) {
             return false;
         }
-
-        return getSubsets(newMultiset, sum).getKey();
+        return getSubsets(feasibleMultiset, sum).getKey();
     }
 
     /**
@@ -122,44 +120,14 @@ public class SubsetSumExhaustiveFaster implements ExactSubsetSum{
      * @param args
      */
     public static void main(String[] args) {
-        List<Long> S = Arrays.asList(1L, 8L, 3L, 9L, 10L, 32L, 42L, 5L,
-                12L, 14L, 24L, 5L, 7L, 6L, 78L);
-        List<Long> S2 = new ArrayList<>();
-        for (int i = 0; i < 20; i++){
-            S2.add(8L);
-        }
-
-        SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
-        SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
-
-        int k = 24;
-        boolean result = exhaustiveFaster.subsetExists(S, k);
+        List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
+        SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
+        int k = 4;
+        boolean result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
 
-        k = 84;
-        Timer.start();
-        result = exhaustiveFaster.subsetExists(S, k);
-        Timer.stop();
-        System.out.println("\nFast Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        Timer.start();
-        result = exhaustive.subsetExists(S, k);
-        Timer.stop();
-        System.out.println("Slow Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        k = 55;
-        Timer.start();
-        result = exhaustiveFaster.subsetExists(S2, k);
-        Timer.stop();
-        System.out.println("\nFast Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
-
-        Timer.start();
-        result = exhaustive.subsetExists(S2, k);
-        Timer.stop();
-        System.out.println("Slow Version: " + result);
-        System.out.println("Time: " + Timer.getRuntime());
+        k = 8;
+        result = subsetSumExhaustive.subsetExists(S, k);
+        System.out.println(result);
     }
 }

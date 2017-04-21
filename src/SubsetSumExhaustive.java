@@ -13,7 +13,7 @@ import java.util.List;
  * Finds if there exists a subset of the set S where
  * the sum of its elements is equal to a specified sum k.
  */
-public class SubsetSumExhaustive implements ExactSubsetSum{
+public class SubsetSumExhaustive implements ExactSubsetSum {
 
     /**
      * Checks all possible subsets of S until it finds a subset (if any)
@@ -26,19 +26,21 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
      */
     @Override
     public boolean subsetExists(List<Long> multiset, int sum) {
-        List<Long> newMultiset = new ArrayList<>();
+        List<Long> feasibleMultiset = new ArrayList<>();
 
         // remove values greater than the sum
         for (int i = 0; i < multiset.size(); i++) {
-            Long item = multiset.get(i);
-            if (item <= sum) {
-                newMultiset.add(item);
+            Long val = multiset.get(i);
+            if (val < sum) {
+                feasibleMultiset.add(val);
             }
-
+            else if (val == sum){
+                return true;
+            }
         }
 
         // get all subsets of the feasible multiset
-        List<List<Long>> subsets = getSubsets(newMultiset);
+        List<List<Long>> subsets = getSubsets(feasibleMultiset);
         // for each possible subset, check to see if its sum = target sum
         for (List<Long> subset : subsets) {
             if (SubsetUtil.getSum(subset) == sum) {
@@ -75,7 +77,6 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
             for (List<Long> subset : subsets) {
                 subset.add(0, firstElement);
             }
-
             subsetsList.addAll(subsets);
         }
         return subsetsList;
@@ -89,11 +90,11 @@ public class SubsetSumExhaustive implements ExactSubsetSum{
     public static void main(String[] args) {
         List<Long> S = Arrays.asList(1L, 2L, 3L, 9L);
         SubsetSumExhaustive subsetSumExhaustive = new SubsetSumExhaustive();
-        int k = 8;
+        int k = 4;
         boolean result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
 
-        k = 11;
+        k = 8;
         result = subsetSumExhaustive.subsetExists(S, k);
         System.out.println(result);
     }

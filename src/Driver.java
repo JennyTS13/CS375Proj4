@@ -127,14 +127,14 @@ public class Driver {
         SubsetSumExhaustive exhaustive = new SubsetSumExhaustive();
         SubsetSumExhaustiveFaster exhaustiveFaster = new SubsetSumExhaustiveFaster();
         SubsetSumHillClimb hillClimb = new SubsetSumHillClimb();
-        SubsetSumSimulatedAnnealing annealing = new SubsetSumSimulatedAnnealing();
+        SubsetSumSimAnnealing annealing = new SubsetSumSimAnnealing();
         SubsetSumRandom random = new SubsetSumRandom();
 
         for (int i = 0; i < numElements.length; i++) {
             initialize(numElements[i], max, maxSum);
-            // won't work past 10 elements
+            // won't work past 20 elements (too slow)
             testExact("Exhaustive", exhaustive);
-            // won't work past 10,000 elements
+            // won't work past 10,000 elements (too slow)
             testExact("Exhaustive Fast", exhaustiveFaster);
             testExact("Dynamic Programming", dynamicProgramming);
             testGreedy();
